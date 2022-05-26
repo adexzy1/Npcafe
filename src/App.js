@@ -1,12 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import Cart from './components/Cart';
-import Header from './components/Header';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTotals } from './Redux/CartReducer';
+import Cart from './components/Cart';
+import Layout from './pages/Layout';
+import Favourites from './components/Favourites';
 
 function App() {
   const dispatch = useDispatch();
@@ -19,9 +20,13 @@ function App() {
   return (
     <div className="App">
       <ToastContainer />
-      <Header />
+
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/favourites" element={<Favourites />} />
+        </Route>
+
         <Route path="/cart" element={<Cart />} />
       </Routes>
     </div>

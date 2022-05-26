@@ -11,7 +11,7 @@ const Filter = () => {
   };
 
   return (
-    <div className="relative flex items-center">
+    <div className="relative flex items-center ">
       <p>filter</p>
       <p
         id="selecteField"

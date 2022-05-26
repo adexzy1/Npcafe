@@ -7,12 +7,12 @@ import TopBar from '../components/TopBar';
 
 const Home = () => {
   return (
-    <div className="pb-[8vh]">
+    <div className="pb-[8vh] min-h-screen">
       <TopBar />
       <HeroCard />
       <Category />
       <Products />
-      <Cart />
+      {/* <Cart /> */}
     </div>
   );
 };

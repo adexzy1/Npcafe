@@ -8,8 +8,12 @@ const NavLinks = ({ children, to, icon, ...props }) => {
     link: `flex items-center py-3 mb-2 gap-2 hover:bg-yellow hover:px-2 hover:text-white rounded-lg`,
     icon: ``,
   };
+
+  const handleToggle = () => {
+    props.setToggle((prev) => !prev);
+  };
   return (
-    <div>
+    <div onClick={handleToggle}>
       <Link className={style.link} to={to}>
         <i className={style.icon}>{icon}</i>
         {children}

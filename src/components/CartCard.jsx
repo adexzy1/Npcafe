@@ -7,7 +7,7 @@ const CartCard = ({ product }) => {
   const dispatch = useDispatch();
 
   return (
-    <section className="flex  rounded-lg shadow  mx-5 my-5 overflow-hidden">
+    <section className="flex  rounded-lg shadow  mx-5 my-5 overflow-hidden relative">
       <div className="py-3 flex items-center justify-between flex-1 px-2">
         <div className="flex items-center">
           <div className="w-16 h-16 flex items-center justify-center bg-blue-400 p-1 rounded-md mr-5">

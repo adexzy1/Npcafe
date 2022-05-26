@@ -66,23 +66,9 @@ const cartReducer = createSlice({
       state.totalPrice = price;
       state.totalQuantity = quantity;
     },
-
-    toggleCart: (state, action) => {
-      state.toggleState = action.payload;
-      switch (state.toggleState) {
-        case false:
-          document.body.style.overflowY = 'scroll';
-          break;
-        case true:
-          document.body.style.overflowY = 'hidden';
-          break;
-        default:
-          document.body.style.overflowY = 'scroll';
-      }
-    },
   },
 });
 
-export const { addToCart, reduceItem, removeItem, getTotals, toggleCart } =
+export const { addToCart, reduceItem, removeItem, getTotals } =
   cartReducer.actions;
 export default cartReducer.reducer;
