@@ -1,0 +1,33 @@
+.wrapper {
+  position: relative;
+  margin-top: 2rem;
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-left: 10px;
+  font-size: 15px;
+  color: #fb9900;
+  pointer-events: none;
+  left: 0.4rem;
+  transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+}
+
+.input {
+  width: 100%;
+  border: 1.2px solid #fb9900;
+  padding: 1rem 10px;
+  border-radius: 5px;
+  outline: none;
+  font-size: 15px;
+}
+
+.input:focus ~ .label,
+.input:not(:placeholder-shown).input:not(:focus) ~ .label {
+  top: -0.03rem;
+  font-size: 13px;
+  background-color: #fff;
+  padding: 0 5px;
+}
