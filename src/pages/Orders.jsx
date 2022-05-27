@@ -1,7 +1,21 @@
-import React from 'react';
+import TopBar from '../components/TopBar';
+import TransactionsCard from '../components/TransactionsCard';
 
 const Orders = () => {
-  return <div>Orders</div>;
+  return (
+    <section className="min-h-screen bg-white pt-5 pb-28">
+      <TopBar text="Orders" />
+      <section className="mt-10 px-5">
+        <TransactionsCard isComplete={'Pending'} />
+        <TransactionsCard isComplete={'Completed'} />
+        <TransactionsCard isComplete={'Pending'} />
+        <TransactionsCard isComplete={'Pending'} />
+        <TransactionsCard isComplete={'Pending'} />
+        <TransactionsCard isComplete={'Pending'} />
+        <TransactionsCard isComplete={'Pending'} />
+      </section>
+    </section>
+  );
 };
 
 export default Orders;

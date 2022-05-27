@@ -21,17 +21,17 @@ const Signup = () => {
 
         <div
           onClick={() => setShowPass((prev) => !prev)}
-          className="absolute top-[30%] text-2xl right-3 text-gray-400"
+          className="absolute top-[30%] text-2xl right-3 text-darkGrey"
         >
           {showPass ? <AiFillEyeInvisible /> : <AiFillEye />}
         </div>
       </div>
 
       <button className="bg-yellow text-white w-full text-lg mt-10 py-3.5 block rounded-md">
-        Login
+        Create Account
       </button>
 
-      <section className="text-md text-center pt-5 text-gray-400">
+      <section className="text-md text-center pt-5 text-darkGrey">
         Already have an Account?
         <Link className="text-yellow pl-1" to={'/login'}>
           Log in

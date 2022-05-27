@@ -9,7 +9,7 @@
   transform: translateY(-50%);
   padding-left: 10px;
   font-size: 15px;
-  color: #fb9900;
+  color: #808080;
   pointer-events: none;
   left: 0.4rem;
   transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
@@ -17,7 +17,7 @@
 
 .input {
   width: 100%;
-  border: 1.2px solid #fb9900;
+  border: 1.2px solid #808080;
   padding: 1rem 10px;
   border-radius: 5px;
   outline: none;

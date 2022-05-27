@@ -42,10 +42,10 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <section className="bg-white px-5 py-7 rounded-lg hover:shadow">
+    <section className="bg-white px-5 py-7 rounded-lg shadow">
       <section
         onClick={() => handleFavourite(product)}
-        className="text-red-500 absolute right-10 text-3xl cursor-pointer"
+        className="text-[#c8161d] absolute right-10 text-3xl cursor-pointer"
       >
         {isFavourite || fav ? <AiFillHeart /> : <AiOutlineHeart />}
       </section>

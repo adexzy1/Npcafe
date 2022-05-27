@@ -3,7 +3,7 @@ import { useState } from 'react';
 const Filter = () => {
   const [isActive, setIsActive] = useState(false);
   const [selected, setSelected] = useState('All');
-  const options = ['Pizza', 'Hotdog', 'Tacos', 'Snack', 'Drink'];
+  const options = ['All', 'Pizza', 'Hotdog', 'Tacos', 'Snack', 'Drink'];
 
   const handleSelectedOption = (e) => {
     setSelected(e.target.textContent);
@@ -16,13 +16,13 @@ const Filter = () => {
       <p
         id="selecteField"
         onClick={() => setIsActive((prev) => !prev)}
-        className="bg-white py-1 px-2 w-16 text-sm text-center rounded-lg ml-2"
+        className="bg-yellow text-white py-1 px-2 w-16 text-sm text-center rounded-lg ml-2"
       >
         {selected}
       </p>
 
       <section
-        className={`absolute top-10 bg-white w-full p-3 text-sm rounded-lg shadow  ${
+        className={`absolute top-10 bg-white w-full p-3 text-sm rounded-lg shadow z-10 ${
           isActive ? 'block' : 'hidden'
         }`}
       >

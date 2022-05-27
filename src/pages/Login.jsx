@@ -20,13 +20,13 @@ const Login = () => {
 
         <div
           onClick={() => setShowPass((prev) => !prev)}
-          className="absolute top-[30%] text-2xl right-3 text-gray-400"
+          className="absolute top-[30%] text-2xl right-3 text-darkGrey"
         >
           {showPass ? <AiFillEyeInvisible /> : <AiFillEye />}
         </div>
       </div>
 
-      <section className="text-gray-400 text-sm pt-3 text-right">
+      <section className="text-darkGrey text-sm pt-3 text-right">
         <Link to={'/'}>Forgot Password ?</Link>
       </section>
 
@@ -34,7 +34,7 @@ const Login = () => {
         Login
       </button>
 
-      <section className="text-md text-center pt-5 text-gray-400">
+      <section className="text-md text-center pt-5 text-darkGrey">
         Don’t have an Account?
         <Link className="text-yellow pl-1" to={'/signup'}>
           Sign up

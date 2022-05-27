@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 const PageLayout = () => {
   return (
-    <section className="bg-[#d1d0d2]">
+    <section>
       <Header />
       <Outlet />
     </section>

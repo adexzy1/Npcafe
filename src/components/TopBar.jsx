@@ -1,17 +1,19 @@
-import { BiSearch } from 'react-icons/bi';
+import { HiOutlineArrowNarrowLeft } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 
-const TopBar = () => {
+const TopBar = ({ text }) => {
+  const navigate = useNavigate();
+
   return (
-    <section className="p-5">
-      <h1 className="font-bold text-xl">Today&apos;s Menu 😋</h1>
-
-      <section className="flex items-center justify-center bg-white py-2 px-3 rounded-3xl mt-3">
-        <input
-          placeholder="Search by food name"
-          className="bg-transparent flex-1 ml-1 text-sm outline-none"
-        />
-        <BiSearch />
+    <section className="flex text-2xl items-center px-5">
+      <section
+        onClick={() => navigate('/')}
+        className="py-3 px-4 bg-grey mr-3 rounded-xl"
+      >
+        <HiOutlineArrowNarrowLeft />
       </section>
+
+      <h1 className="font-semibold">{text}</h1>
     </section>
   );
 };

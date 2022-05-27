@@ -1,12 +1,13 @@
 import ProductCard from '../components/ProductCard';
 import { useSelector } from 'react-redux';
+import TopBar from '../components/TopBar';
 
 const Favourites = () => {
   const { favouriteItems } = useSelector((state) => state.favourites);
 
   return (
-    <section className="min-h-screen pt-10 pb-16">
-      <h1 className="text-2xl font-bold px-5">Favourites</h1>
+    <section className="min-h-screen pt-5 pb-16">
+      <TopBar text={'Favourites'} />
 
       {favouriteItems.length > 0 && (
         <section className="px-5 py-10 flex flex-col gap-y-10">

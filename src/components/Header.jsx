@@ -13,7 +13,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const style = {
-    headerWrapper: ` fixed w-full left-0 bottom-0 z-10`,
+    headerWrapper: `fixed w-full left-0 bottom-0 z-10`,
     nav: 'flex justify-between items-center px-5 py-3  bg-white rounded-t-2xl shadow',
     logo: 'text-xl font-bold',
     logoSub: 'text-xs text-yellow',
@@ -51,7 +51,10 @@ const Header = () => {
           </section>
 
           <section className={style.headerRightCol}>
-            <BiUserCircle />
+            <Link to={'/login'}>
+              <BiUserCircle />
+            </Link>
+
             <CgMenuGridR onClick={toggleMenu} />
           </section>
         </div>
