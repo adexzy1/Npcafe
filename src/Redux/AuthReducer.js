@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { auth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../config/firebase';
 
 const authReducer = createSlice({
   name: 'Authentication',
