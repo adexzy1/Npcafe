@@ -14,6 +14,9 @@ import PageLayout from './layouts/PageLayout';
 import Onboarding from './layouts/Onboarding';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './config/firebase';
+import { setUser } from './Redux/UserSlice';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,9 +26,30 @@ function App() {
     dispatch(getTotals());
   }, [cartItems, dispatch]);
 
+  onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser) {
+      const { displayName, email, uid, photoURL } = currentUser;
+      const userData = {
+        displayName,
+        email,
+        uid,
+        photoURL,
+      };
+      dispatch(setUser(userData));
+    } else {
+      dispatch(setUser([]));
+    }
+  });
+
   return (
     <div className="App">
-      <ToastContainer />
+      <ToastContainer
+        theme="dark"
+        autoClose={700}
+        hideProgressBar={true}
+        pauseOnHover={true}
+        position="top-right"
+      />
 
       <Routes>
         <Route element={<PageLayout />}>

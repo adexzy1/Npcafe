@@ -2,7 +2,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 const Onboarding = () => {
   const style = {
-    wrapper: 'min-h-screen px-5',
+    wrapper: 'px-5',
     logo: 'text-6xl font-bold pt-10 text-center',
     logoSub: 'text-2xl text-yellow',
   };

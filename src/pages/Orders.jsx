@@ -3,7 +3,7 @@ import TransactionsCard from '../components/TransactionsCard';
 
 const Orders = () => {
   return (
-    <section className="min-h-screen bg-white pt-5 pb-28">
+    <section className="pt-5 pb-28">
       <TopBar text="Orders" />
       <section className="mt-10 px-5">
         <TransactionsCard isComplete={'Pending'} />

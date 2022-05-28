@@ -31,3 +31,14 @@
   background-color: #fff;
   padding: 0 5px;
 }
+
+.errorText {
+  position: absolute;
+  font-size: 12px;
+  padding-top: 3px;
+  color: #c8161d;
+}
+
+.error {
+  border: 1.2px solid #c8161d;
+}

@@ -9,6 +9,7 @@ const UploadAvatar = () => {
   const [image, setImage] = useState('');
 
   const handleUpload = (e) => {
+    e.preventDefault();
     let file = e.target.files[0];
 
     if (file && file.type.substr(0, 5) === 'image') {
@@ -37,14 +38,14 @@ const UploadAvatar = () => {
       onMouseLeave={() => setUploader(false)}
       className=" w-[6rem] h-[6rem] rounded-full overflow-hidden relative mt-10 border border-yellow"
     >
-      <button
+      <div
         onClick={() => inputRef.current.click()}
         className={`absolute  ${
           uploader ? 'bottom-0' : 'bottom-[-100%]'
-        } block  opacity-1 h-full w-full hover:opacity-100  bg-rgba text-white transition-all duration-300`}
+        } h-full w-full flex bg-rgba text-white transition-all duration-300`}
       >
         <IoCameraOutline className="m-auto text-3xl" />
-      </button>
+      </div>
 
       <img
         src={filePreview ? filePreview : avatar}

@@ -5,7 +5,7 @@ import Transactions from '../components/Transactions';
 
 const Wallet = () => {
   return (
-    <section className="min-h-screen bg-white pt-5 pb-28">
+    <section className="pt-5 pb-28">
       <TopBar text={'Wallet'} />
 
       <div className="px-5 pb-2 pt-10 flex justify-between items-end">

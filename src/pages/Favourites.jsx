@@ -6,7 +6,7 @@ const Favourites = () => {
   const { favouriteItems } = useSelector((state) => state.favourites);
 
   return (
-    <section className="min-h-screen pt-5 pb-16">
+    <section className="pt-5 pb-16">
       <TopBar text={'Favourites'} />
 
       {favouriteItems.length > 0 && (
