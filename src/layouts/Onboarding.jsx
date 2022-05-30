@@ -1,5 +1,5 @@
-import { Link, Outlet } from 'react-router-dom';
-
+import { Link, Outlet, Navigate } from 'react-router-dom';
+import { auth } from '../config/firebase';
 const Onboarding = () => {
   const style = {
     wrapper: 'px-5',
@@ -8,17 +8,23 @@ const Onboarding = () => {
   };
 
   return (
-    <section className={style.wrapper}>
-      <Link to={'/'}>
-        <p className={style.logo}>
-          NP<span className={style.logoSub}>Cafe</span>
-        </p>
-      </Link>
+    <>
+      {auth.currentUser ? (
+        <Navigate to={'/'} />
+      ) : (
+        <section className={style.wrapper}>
+          <Link to={'/'}>
+            <p className={style.logo}>
+              NP<span className={style.logoSub}>Cafe</span>
+            </p>
+          </Link>
 
-      <section className="pt-10">
-        <Outlet />
-      </section>
-    </section>
+          <section className="pt-10">
+            <Outlet />
+          </section>
+        </section>
+      )}
+    </>
   );
 };
 

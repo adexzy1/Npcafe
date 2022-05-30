@@ -1,10 +1,7 @@
 import css from '../css/Input.module.css';
 import { forwardRef } from 'react';
-import useValidation from '../hooks/UseValidation';
 
 const Input = forwardRef(({ name, type, label, error, ...otherProps }, ref) => {
-  const { register } = useValidation();
-
   return (
     <div className={css.wrapper}>
       <input

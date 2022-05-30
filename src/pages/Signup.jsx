@@ -6,10 +6,10 @@ import { useState } from 'react';
 import useSignup from '../hooks/UseSignup';
 import loadingIcon from '../assets/loading.svg';
 import useValidation from '../hooks/UseValidation';
-import { signupSchema } from '../Schema/Schema';
 import useHandleError from '../hooks/useHandleError';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import signupSchema from '../Schema/signupSchema';
 
 const Signup = () => {
   const [showPass, setShowPass] = useState(false);
@@ -24,7 +24,6 @@ const Signup = () => {
     setIsLoading(true);
     // handle signup
     const response = await signup(data);
-
     if (response === 'success') {
       // show notification
       toast.success('Account Created successFully');

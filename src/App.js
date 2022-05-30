@@ -17,6 +17,7 @@ import Signup from './pages/Signup';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './config/firebase';
 import { setUser } from './Redux/UserSlice';
+import RequireAuth from './pages/RequireAuth';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,26 +27,29 @@ function App() {
     dispatch(getTotals());
   }, [cartItems, dispatch]);
 
-  onAuthStateChanged(auth, (currentUser) => {
-    if (currentUser) {
-      const { displayName, email, uid, photoURL } = currentUser;
-      const userData = {
-        displayName,
-        email,
-        uid,
-        photoURL,
-      };
-      dispatch(setUser(userData));
-    } else {
-      dispatch(setUser([]));
-    }
-  });
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        const { displayName, email, uid, photoURL } = currentUser;
+
+        const userData = {
+          displayName,
+          email,
+          uid,
+          photoURL,
+        };
+        dispatch(setUser(userData));
+      } else {
+        dispatch(setUser(null));
+      }
+    });
+  }, [dispatch]);
 
   return (
     <div className="App">
       <ToastContainer
         theme="dark"
-        autoClose={700}
+        autoClose={1000}
         hideProgressBar={true}
         pauseOnHover={true}
         position="top-right"
@@ -54,10 +58,13 @@ function App() {
       <Routes>
         <Route element={<PageLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/favourites" element={<Favourites />} />
-          <Route path="/wallet" element={<Wallet />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/settings" element={<Settings />} />
+
+          <Route element={<RequireAuth />}>
+            <Route path="/favourites" element={<Favourites />} />
+            <Route path="/wallet" element={<Wallet />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/settings" element={<Settings />} />
+          </Route>
         </Route>
 
         <Route element={<Onboarding />}>

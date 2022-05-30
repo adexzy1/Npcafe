@@ -1,6 +1,13 @@
 import hero from '../assets/hero.png';
+import { useSelector } from 'react-redux';
 
 const HeroCard = () => {
+  const { user } = useSelector((state) => state.user);
+
+  if (user) {
+    var username = user.displayName.split(' ')[0];
+  }
+
   const style = {
     heroWrapper: 'm-5 p-5 flex bg-[#feecd4] items-center rounded-lg',
     h3: 'font-bold text-xl',
@@ -14,7 +21,7 @@ const HeroCard = () => {
         <img src={hero} alt="hero avatar" />
       </div>
       <div className="ml-4">
-        <h3 className={style.h3}>Hello Jeremy,</h3>
+        <h3 className={style.h3}>Hello {user && username}</h3>
         <p className={style.p}>
           Get free delivery on every <span className="text-yellow">₦2000</span>{' '}
           purchase

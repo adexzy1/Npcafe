@@ -4,12 +4,12 @@ import Input from '../components/Input';
 import { AiFillEyeInvisible } from 'react-icons/ai';
 import { AiFillEye } from 'react-icons/ai';
 import useValidation from '../hooks/UseValidation';
-import { loginSchema } from '../Schema/Schema';
 import useLogin from '../hooks/useLogin';
 import useHandleError from '../hooks/useHandleError';
 import { toast } from 'react-toastify';
 import loadingIcon from '../assets/loading.svg';
 import { useNavigate } from 'react-router-dom';
+import loginSchema from '../Schema/loginSchema';
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
@@ -51,8 +51,8 @@ const Login = () => {
         label="Email"
         name="email"
         type="email"
-        {...register('loginEmail')}
-        error={errors.loginEmail}
+        {...register('email')}
+        error={errors.email}
       />
 
       <div className="relative">
@@ -60,8 +60,8 @@ const Login = () => {
           label="Password"
           name="password"
           type={showPass ? 'text' : 'password'}
-          {...register('loginPassword')}
-          error={errors.loginPassword}
+          {...register('password')}
+          error={errors.password}
         />
 
         <div

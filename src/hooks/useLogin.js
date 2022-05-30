@@ -3,9 +3,9 @@ import { auth } from '../config/firebase';
 
 const useLogin = () => {
   const login = async (data) => {
-    const { loginEmail, loginPassword } = data;
+    const { email, password } = data;
     try {
-      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      await signInWithEmailAndPassword(auth, email, password);
       return 'success';
     } catch (err) {
       return err;

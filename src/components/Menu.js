@@ -6,15 +6,24 @@ import { IoSettingsOutline } from 'react-icons/io5';
 import { IoMdLogOut } from 'react-icons/io';
 import { RiUserReceived2Line } from 'react-icons/ri';
 import NavLinks from './NavLinks';
+import { useSelector } from 'react-redux';
+import { auth } from '../config/firebase';
+import { toast } from 'react-toastify';
 
 const Menu = ({ toggle, setToggle }) => {
+  const { user } = useSelector((state) => state.user);
+
+  const handleLogOut = () => {
+    setToggle(false);
+    auth.signOut();
+    toast.success('Logged Out Success');
+  };
+
   const style = {
     navWrapper: `px-5 bg-white py-5  bottom-[4rem] absolute w-screen left-0 transform transition-all duration-500 ease-in-out rounded-t-2xl z-[-10] shadow  ${
       toggle ? 'traslate-y-0' : 'translate-y-[100vh]'
     }`,
   };
-
-  const user = false;
 
   return (
     <nav className={style.navWrapper}>
@@ -47,9 +56,12 @@ const Menu = ({ toggle, setToggle }) => {
       </NavLinks>
 
       {user ? (
-        <NavLinks to={'/'} icon={<IoMdLogOut />} setToggle={setToggle}>
-          Log Out
-        </NavLinks>
+        <button
+          className="flex w-full items-center py-3 mb-2 gap-2 hover:bg-yellow hover:px-2 hover:text-white rounded-lg"
+          onClick={handleLogOut}
+        >
+          <IoMdLogOut /> Log Out
+        </button>
       ) : (
         <NavLinks
           to={'/login'}
