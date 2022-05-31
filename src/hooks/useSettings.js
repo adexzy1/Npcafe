@@ -24,7 +24,7 @@ const useSettings = () => {
         // storage refrence
         const storageRef = ref(
           storage,
-          'ProfileImages/' + auth.currentUser.uid + extention
+          'ProfileImages/' + auth.currentUser.uid + `.${extention}`
         );
 
         // upload profile Image to firebase storage
@@ -53,6 +53,8 @@ const useSettings = () => {
           email: auth.currentUser.email,
           uid: auth.currentUser.uid,
           photoURL: auth.currentUser.photoURL,
+          phone: phone,
+          address: address,
         })
       );
 

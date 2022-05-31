@@ -25,13 +25,10 @@ const Settings = () => {
   const [handleError] = useHandleError();
 
   // React-hook-froms watch method to track input changes
-  const fullName = watch(
-    'fullName',
-    user?.displayName ? user.displayName : 'john'
-  );
-  const email = watch('email', user?.email ? user.email : 'test@test.com');
-  const phone = watch('phone', '07065368281');
-  const address = watch('address', '22 amoke alasela');
+  const fullName = watch('fullName', user?.displayName ? user.displayName : '');
+  const email = watch('email', user?.email ? user.email : '');
+  const phone = watch('phone', user?.phone ? user.phone : '');
+  const address = watch('address', user?.address ? user.address : '');
 
   const onSubmit = async (data) => {
     console.log(data);

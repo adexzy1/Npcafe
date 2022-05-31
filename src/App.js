@@ -15,30 +15,42 @@ import Onboarding from './layouts/Onboarding';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './config/firebase';
+import { auth, DB } from './config/firebase';
 import { setUser } from './Redux/UserSlice';
 import RequireAuth from './pages/RequireAuth';
+import { onValue, ref } from 'firebase/database';
 
 function App() {
+  // Redux hooks
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
 
+  // get the number of total cart items
   useEffect(() => {
     dispatch(getTotals());
   }, [cartItems, dispatch]);
 
+  // set the current user object to the global state
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         const { displayName, email, uid, photoURL } = currentUser;
 
-        const userData = {
-          displayName,
-          email,
-          uid,
-          photoURL,
-        };
-        dispatch(setUser(userData));
+        const dbRef = ref(DB, 'users/' + currentUser.uid);
+        onValue(dbRef, (snapshot) => {
+          const data = snapshot.val();
+
+          dispatch(
+            setUser({
+              displayName,
+              email,
+              uid,
+              photoURL,
+              phone: data.phone,
+              address: data.address,
+            })
+          );
+        });
       } else {
         dispatch(setUser(null));
       }
