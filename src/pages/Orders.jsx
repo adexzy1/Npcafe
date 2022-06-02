@@ -31,7 +31,7 @@ const Orders = () => {
       </section>
 
       <section className="mt-10 px-5">
-        {transactions.length < 1 ? (
+        {transactions.length === 0 ? (
           <>
             <img src={loadingIcon} alt="loading.." className="w-16 m-auto" />
           </>

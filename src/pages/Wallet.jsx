@@ -11,7 +11,7 @@ const Wallet = () => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    const getTransactions = async () => {
+    const getTransactions = () => {
       const dbRef = ref(DB, `transactions/${auth.currentUser.uid}`);
 
       onValue(dbRef, (data) => {
@@ -41,7 +41,7 @@ const Wallet = () => {
       <section className="mt-10 px-5">
         <h5 className="font-semibold pb-5">Transactions</h5>
 
-        {transactions.length < 1 ? (
+        {transactions.length === 0 ? (
           <>
             <img src={loadingIcon} alt="loading.." className="w-16 m-auto" />
           </>
