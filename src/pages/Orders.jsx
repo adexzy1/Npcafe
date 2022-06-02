@@ -19,7 +19,9 @@ const Orders = () => {
       });
     };
 
-    return getTransactions;
+    getTransactions();
+
+    return () => getTransactions;
   }, [user]);
 
   return (

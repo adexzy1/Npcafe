@@ -19,8 +19,9 @@ const Wallet = () => {
         console.log(data.val());
       });
     };
+    getTransactions();
 
-    return getTransactions;
+    return () => getTransactions;
   }, []);
 
   return (
