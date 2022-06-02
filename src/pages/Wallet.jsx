@@ -6,22 +6,24 @@ import { DB, auth } from '../config/firebase';
 import { ref, onValue } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import TransactionsCard from '../components/TransactionsCard';
+import { useSelector } from 'react-redux';
 
 const Wallet = () => {
   const [transactions, setTransactions] = useState([]);
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    const getTransactions = () => {
-      const dbRef = ref(DB, `transactions/${auth.currentUser.uid}`);
+    if (user) {
+      const getTransactions = () => {
+        const dbRef = ref(DB, `transactions/${auth.currentUser.uid}`);
 
-      onValue(dbRef, (data) => {
-        setTransactions(data.val());
-      });
-    };
-    getTransactions();
-
-    return () => getTransactions;
-  }, []);
+        onValue(dbRef, (data) => {
+          setTransactions(data.val());
+        });
+      };
+      getTransactions();
+    }
+  }, [user]);
 
   return (
     <section className="pt-5 pb-28">
@@ -41,13 +43,13 @@ const Wallet = () => {
       <section className="mt-10 px-5">
         <h5 className="font-semibold pb-5">Transactions</h5>
 
-        {transactions.length === 0 ? (
+        {transactions?.length === 0 ? (
           <>
             <img src={loadingIcon} alt="loading.." className="w-16 m-auto" />
           </>
         ) : (
           <>
-            {transactions.map((item, index) => (
+            {transactions?.map((item, index) => (
               <TransactionsCard key={item.name} item={item} index={index} />
             ))}
           </>

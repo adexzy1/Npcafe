@@ -12,16 +12,16 @@ const Orders = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    const getTransactions = () => {
-      const dbRef = ref(DB, `transactions/${user.uid}`);
-      onValue(dbRef, (data) => {
-        setTransactions(data.val());
-      });
-    };
+    if (user) {
+      const getTransactions = () => {
+        const dbRef = ref(DB, `transactions/${user.uid}`);
+        onValue(dbRef, (data) => {
+          setTransactions(data.val());
+        });
+      };
 
-    getTransactions();
-
-    return () => getTransactions;
+      getTransactions();
+    }
   }, [user]);
 
   return (

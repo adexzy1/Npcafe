@@ -1,5 +1,6 @@
 import React from 'react';
 import TopBar from './TopBar';
+import loadingIcon from '../assets/loading.svg';
 import TransactionsCard from './TransactionsCard';
 import { DB } from '../config/firebase';
 import { onValue, ref } from 'firebase/database';
@@ -13,19 +14,19 @@ const Transaction = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    const getTransactions = () => {
-      const dbRef = ref(
-        DB,
-        'transactions/' + user?.uid + `/${params.id}/details`
-      );
-      onValue(dbRef, (data) => {
-        setTransactions(data.val());
-      });
-    };
+    if (user) {
+      const getTransactions = () => {
+        const dbRef = ref(
+          DB,
+          'transactions/' + user.uid + `/${params.id}/details`
+        );
+        onValue(dbRef, (data) => {
+          setTransactions(data.val());
+        });
+      };
 
-    getTransactions();
-
-    return () => getTransactions;
+      getTransactions();
+    }
   }, [user, params]);
 
   const getTotal = () => {
@@ -42,17 +43,26 @@ const Transaction = () => {
     <section className="pt-5">
       <TopBar text={'Oder#1'} link={-1} />
 
-      <section className="px-5 pt-5">
-        {transactions.map((item) => (
-          <TransactionsCard key={item.id} item={item} orderItem />
-        ))}
-      </section>
+      {!user && (
+        <img src={loadingIcon} alt="loading.." className="w-16 m-auto" />
+      )}
 
-      <section className="text-right px-5 font-semibold text-xl text-yellow pt-5">
-        <p>
-          Total: <span className="font-normal text-black">{getTotal()}</span>
-        </p>
-      </section>
+      {user && (
+        <>
+          {' '}
+          <section className="px-5 pt-5">
+            {transactions.map((item) => (
+              <TransactionsCard key={item.id} item={item} orderItem />
+            ))}
+          </section>
+          <section className="text-right px-5 font-semibold text-xl text-yellow pt-5">
+            <p>
+              Total:{' '}
+              <span className="font-normal text-black">{getTotal()}</span>
+            </p>
+          </section>
+        </>
+      )}
     </section>
   );
 };

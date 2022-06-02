@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTotals } from './Redux/CartReducer';
 import Cart from './components/Cart';
@@ -20,13 +20,14 @@ import { auth, DB } from './config/firebase';
 import { setUser } from './Redux/UserSlice';
 import RequireAuth from './pages/RequireAuth';
 import { onValue, ref } from 'firebase/database';
-import Laoding from './components/Laoding';
 
 function App() {
+  // state
+  const [userId, setUserId] = useState({});
+
   // Redux hooks
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
-  const { user } = useSelector((state) => state.user);
 
   // get the number of total cart items
   useEffect(() => {
@@ -37,18 +38,23 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
+        // destructure the currentuser object
         const { displayName, email, uid, photoURL } = currentUser;
 
+        // userId for protected Routes
+        setUserId(uid);
+
         const dbRef = ref(DB, 'users/' + currentUser.uid);
+
         onValue(dbRef, (snapshot) => {
           const data = snapshot.val();
 
           dispatch(
             setUser({
-              displayName,
-              email,
-              uid,
-              photoURL,
+              uid: uid,
+              displayName: displayName,
+              email: email,
+              photoURL: photoURL,
               phone: data.phone,
               address: data.address,
             })
@@ -61,43 +67,37 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
-      {!user && <Laoding />}
+    <div className="App">
+      <ToastContainer
+        theme="dark"
+        autoClose={1000}
+        hideProgressBar={true}
+        pauseOnHover={true}
+        position="top-right"
+      />
 
-      {user && (
-        <div className="App">
-          <ToastContainer
-            theme="dark"
-            autoClose={1000}
-            hideProgressBar={true}
-            pauseOnHover={true}
-            position="top-right"
-          />
+      <Routes>
+        <Route element={<PageLayout />}>
+          <Route path="/" element={<Home />} />
 
-          <Routes>
-            <Route element={<PageLayout />}>
-              <Route path="/" element={<Home />} />
+          {/* protected Routes */}
+          <Route element={<RequireAuth userId={userId} />}>
+            <Route path="/favourites" element={<Favourites />} />
+            <Route path="/wallet" element={<Wallet />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/orders/:id" element={<Transaction />} />
+            <Route path="/settings" element={<Settings />} />
+          </Route>
+        </Route>
 
-              {/* protected Routes */}
-              <Route element={<RequireAuth />}>
-                <Route path="/favourites" element={<Favourites />} />
-                <Route path="/wallet" element={<Wallet />} />
-                <Route path="/orders" element={<Orders />} />
-                <Route path="/orders/:id" element={<Transaction />} />
-                <Route path="/settings" element={<Settings />} />
-              </Route>
-            </Route>
+        <Route element={<Onboarding />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
 
-            <Route element={<Onboarding />}>
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-            </Route>
-
-            <Route path="/cart" element={<Cart />} />
-          </Routes>
-        </div>
-      )}
-    </>
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
+    </div>
   );
 }
 
