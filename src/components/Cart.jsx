@@ -18,7 +18,7 @@ const Cart = () => {
   return (
     <section className="relative bg-white min-h-screen">
       <div>
-        <section className="fixed top-0 p-5 bg-yellow text-white w-full shadow flex justify-between items-center">
+        <section className="fixed top-0 p-5 z-10 bg-yellow text-white w-full shadow flex justify-between items-center">
           <section
             onClick={handleNavigate}
             className="flex items-center text-sm gap-1  rounded-2xl p-1"

@@ -14,6 +14,7 @@ import PageLayout from './layouts/PageLayout';
 import Onboarding from './layouts/Onboarding';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Transaction from './components/transaction';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, DB } from './config/firebase';
 import { setUser } from './Redux/UserSlice';
@@ -71,10 +72,12 @@ function App() {
         <Route element={<PageLayout />}>
           <Route path="/" element={<Home />} />
 
+          {/* protected Routes */}
           <Route element={<RequireAuth />}>
             <Route path="/favourites" element={<Favourites />} />
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/orders" element={<Orders />} />
+            <Route path="/orders/:id" element={<Transaction />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
         </Route>

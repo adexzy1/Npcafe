@@ -1,4 +1,3 @@
-import hero from '../assets/hero.png';
 import { useSelector } from 'react-redux';
 
 const HeroCard = () => {
@@ -17,8 +16,11 @@ const HeroCard = () => {
 
   return (
     <section className={style.heroWrapper}>
-      <div className="max-w-[10rem]">
-        <img src={hero} alt="hero avatar" />
+      <div className="max-w-[9rem]">
+        <img
+          src="https://ik.imagekit.io/oz87xfgij/AppImg/tr:w-300/hero_836XGdawp.png"
+          alt="hero avatar"
+        />
       </div>
       <div className="ml-4">
         <h3 className={style.h3}>Hello {user && username}</h3>

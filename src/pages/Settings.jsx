@@ -52,7 +52,7 @@ const Settings = () => {
 
   return (
     <section className="min-h-screen pt-5 pb-28">
-      <TopBar text={'Settings'} />
+      <TopBar text={'Settings'} link={'/'} />
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <section className="px-5">

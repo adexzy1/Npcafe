@@ -1,12 +1,35 @@
 import React from 'react';
 import CreditCard from '../components/CreditCard';
+import loadingIcon from '../assets/loading.svg';
 import TopBar from '../components/TopBar';
-import Transactions from '../components/Transactions';
+import { DB, auth } from '../config/firebase';
+import { ref, child, get } from 'firebase/database';
+import { useEffect, useState } from 'react';
+import TransactionsCard from '../components/TransactionsCard';
 
 const Wallet = () => {
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    const getTransactions = async () => {
+      const dbRef = ref(DB);
+      try {
+        const response = await get(
+          child(dbRef, 'transactions/' + auth.currentUser.uid)
+        );
+        setTransactions(response.val());
+        console.log(response.val());
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    return getTransactions;
+  }, []);
+
   return (
     <section className="pt-5 pb-28">
-      <TopBar text={'Wallet'} />
+      <TopBar text={'Wallet'} link={'/'} />
 
       <div className="px-5 pb-2 pt-10 flex justify-between items-end">
         <div>
@@ -19,7 +42,21 @@ const Wallet = () => {
 
       <CreditCard />
 
-      <Transactions />
+      <section className="mt-10 px-5">
+        <h5 className="font-semibold pb-5">Transactions</h5>
+
+        {transactions.length < 1 ? (
+          <>
+            <img src={loadingIcon} alt="loading.." className="w-16 m-auto" />
+          </>
+        ) : (
+          <>
+            {transactions.map((item, index) => (
+              <TransactionsCard key={item.name} item={item} index={index} />
+            ))}
+          </>
+        )}
+      </section>
     </section>
   );
 };

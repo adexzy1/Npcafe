@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { auth } from '../config/firebase';
 
 const RequireAuth = () => {
-  return <>{auth.currentUser ? <Outlet /> : <Navigate to={'/login'} />}</>;
+  return <Outlet />;
 };
 
 export default RequireAuth;

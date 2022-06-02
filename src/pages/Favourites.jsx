@@ -7,7 +7,7 @@ const Favourites = () => {
 
   return (
     <section className="pt-5 pb-16">
-      <TopBar text={'Favourites'} />
+      <TopBar text={'Favourites'} link={'/'} />
 
       {favouriteItems.length > 0 && (
         <section className="px-5 py-10 flex flex-col gap-y-10">
