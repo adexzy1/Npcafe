@@ -13,7 +13,7 @@ const Orders = () => {
 
   useEffect(() => {
     const getTransactions = () => {
-      const dbRef = ref(DB, 'transactions/' + user?.uid);
+      const dbRef = ref(DB, `transactions/${user.uid}`);
       onValue(dbRef, (data) => {
         setTransactions(data.val());
       });

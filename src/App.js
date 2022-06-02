@@ -20,11 +20,13 @@ import { auth, DB } from './config/firebase';
 import { setUser } from './Redux/UserSlice';
 import RequireAuth from './pages/RequireAuth';
 import { onValue, ref } from 'firebase/database';
+import Laoding from './components/Laoding';
 
 function App() {
   // Redux hooks
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.user);
 
   // get the number of total cart items
   useEffect(() => {
@@ -59,37 +61,43 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
-      <ToastContainer
-        theme="dark"
-        autoClose={1000}
-        hideProgressBar={true}
-        pauseOnHover={true}
-        position="top-right"
-      />
+    <>
+      {!user && <Laoding />}
 
-      <Routes>
-        <Route element={<PageLayout />}>
-          <Route path="/" element={<Home />} />
+      {user && (
+        <div className="App">
+          <ToastContainer
+            theme="dark"
+            autoClose={1000}
+            hideProgressBar={true}
+            pauseOnHover={true}
+            position="top-right"
+          />
 
-          {/* protected Routes */}
-          <Route element={<RequireAuth />}>
-            <Route path="/favourites" element={<Favourites />} />
-            <Route path="/wallet" element={<Wallet />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/orders/:id" element={<Transaction />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route>
-        </Route>
+          <Routes>
+            <Route element={<PageLayout />}>
+              <Route path="/" element={<Home />} />
 
-        <Route element={<Onboarding />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Route>
+              {/* protected Routes */}
+              <Route element={<RequireAuth />}>
+                <Route path="/favourites" element={<Favourites />} />
+                <Route path="/wallet" element={<Wallet />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/orders/:id" element={<Transaction />} />
+                <Route path="/settings" element={<Settings />} />
+              </Route>
+            </Route>
 
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
-    </div>
+            <Route element={<Onboarding />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </Route>
+
+            <Route path="/cart" element={<Cart />} />
+          </Routes>
+        </div>
+      )}
+    </>
   );
 }
 

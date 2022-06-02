@@ -19,7 +19,7 @@ const Home = () => {
     <div className="pb-[8vh] min-h-screen">
       <section className="p-5">
         <h1 className="font-bold text-2xl">Today&apos;s Menu 😋</h1>
-        <SearchBar products={products} />
+        <SearchBar items={products} />
       </section>
 
       <HeroCard />

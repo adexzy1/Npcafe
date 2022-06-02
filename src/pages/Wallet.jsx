@@ -3,7 +3,7 @@ import CreditCard from '../components/CreditCard';
 import loadingIcon from '../assets/loading.svg';
 import TopBar from '../components/TopBar';
 import { DB, auth } from '../config/firebase';
-import { ref, child, get } from 'firebase/database';
+import { ref, onValue } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import TransactionsCard from '../components/TransactionsCard';
 
@@ -12,16 +12,12 @@ const Wallet = () => {
 
   useEffect(() => {
     const getTransactions = async () => {
-      const dbRef = ref(DB);
-      try {
-        const response = await get(
-          child(dbRef, 'transactions/' + auth.currentUser.uid)
-        );
-        setTransactions(response.val());
-        console.log(response.val());
-      } catch (err) {
-        console.log(err);
-      }
+      const dbRef = ref(DB, `transactions/${auth.currentUser.uid}`);
+
+      onValue(dbRef, (data) => {
+        setTransactions(data.val());
+        console.log(data.val());
+      });
     };
 
     return getTransactions;

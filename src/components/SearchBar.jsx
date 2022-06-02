@@ -18,7 +18,6 @@ const SearchBar = ({ items }) => {
         const Regex = new RegExp(`${value}`, 'gi');
         return product.name.match(Regex);
       });
-      console.log(matchedText);
       setsuggestion(matchedText);
     } else {
       setIsActive(false);
