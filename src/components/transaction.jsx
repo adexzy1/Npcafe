@@ -23,7 +23,9 @@ const Transaction = () => {
       });
     };
 
-    return getTransactions;
+    getTransactions();
+
+    return () => getTransactions;
   }, [user, params]);
 
   const getTotal = () => {

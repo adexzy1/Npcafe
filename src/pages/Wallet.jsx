@@ -16,7 +16,6 @@ const Wallet = () => {
 
       onValue(dbRef, (data) => {
         setTransactions(data.val());
-        console.log(data.val());
       });
     };
     getTransactions();
