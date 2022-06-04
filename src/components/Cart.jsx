@@ -5,23 +5,28 @@ import { AiOutlineRollback } from 'react-icons/ai';
 
 import { useNavigate } from 'react-router-dom';
 
-const Cart = () => {
+const Cart = ({ setShowCart }) => {
   const { cartItems, totalPrice } = useSelector((state) => state.cart);
 
   const navigate = useNavigate();
   // const dispatch = useDispatch();
 
   const handleNavigate = () => {
-    navigate('/');
+    const width = window.screen.width;
+    if (width >= 768) {
+      setShowCart(false);
+    } else {
+      navigate('/');
+    }
   };
 
   return (
-    <section className="relative bg-white min-h-screen">
+    <section className="relative bg-white min-h-screen md:overflow-y-scroll">
       <div>
         <section className="fixed top-0 p-5 z-10 bg-yellow text-white w-full shadow flex justify-between items-center">
           <section
             onClick={handleNavigate}
-            className="flex items-center text-sm gap-1  rounded-2xl p-1"
+            className="flex items-center text-sm gap-1  rounded-2xl p-1 cursor-pointer"
           >
             <AiOutlineRollback className="text-2xl" />
             {cartItems > 0 ? 'Continue shopping' : 'Back'}

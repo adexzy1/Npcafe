@@ -5,12 +5,19 @@ const NavLinks = ({ children, to, icon, ...props }) => {
   let match = useMatch({ path: resolved.pathname, end: true });
 
   const style = {
-    link: `flex items-center py-3 mb-2 gap-2 hover:bg-yellow hover:px-2 hover:text-white rounded-lg`,
+    link: `flex items-center py-3 mb-2 gap-2 hover:bg-yellow hover:text-white rounded-lg whitespace-nowrap px-2 md:text-sm ${
+      match && 'bg-yellow text-white'
+    }`,
     icon: ``,
   };
 
   const handleToggle = () => {
-    props.setToggle((prev) => !prev);
+    const width = window.screen.width;
+    if (width >= 768) {
+      props.setToggle(false);
+    } else {
+      props.setToggle((prev) => !prev);
+    }
   };
   return (
     <div onClick={handleToggle}>

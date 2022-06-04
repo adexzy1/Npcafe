@@ -17,8 +17,8 @@ const Home = () => {
 
   return (
     <div className="pb-[8vh] min-h-screen">
-      <section className="p-5">
-        <h1 className="font-bold text-2xl">Today&apos;s Menu 😋</h1>
+      <section className="p-5 md:flex items-center md:py-7">
+        <h1 className="font-bold text-2xl flex-1">Today&apos;s Menu 😋</h1>
         <SearchBar items={products} />
       </section>
 

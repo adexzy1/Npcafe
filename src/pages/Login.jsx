@@ -53,8 +53,18 @@ const Login = () => {
     }
   };
 
+  const styles = {
+    wrapper: 'md:w-[40rem] m-auto md:shadow md:p-7 md:rounded-lg',
+    showPass:
+      'absolute top-[30%] text-2xl right-3 text-darkGrey cursor-pointer',
+    inputWrapper: 'relative',
+    forgotPass: 'text-darkGrey text-sm pt-3 text-right',
+    btn: 'bg-yellow text-white w-full text-lg mt-10 h-14 block rounded-md',
+    createAcc: 'text-md text-center pt-5 text-darkGrey',
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
       <Input
         label="Email"
         name="email"
@@ -63,7 +73,7 @@ const Login = () => {
         error={errors.email}
       />
 
-      <div className="relative">
+      <div className={styles.inputWrapper}>
         <Input
           label="Password"
           name="password"
@@ -74,20 +84,17 @@ const Login = () => {
 
         <div
           onClick={() => setShowPass((prev) => !prev)}
-          className="absolute top-[30%] text-2xl right-3 text-darkGrey"
+          className={styles.showPass}
         >
           {showPass ? <AiFillEyeInvisible /> : <AiFillEye />}
         </div>
       </div>
 
-      <section className="text-darkGrey text-sm pt-3 text-right">
+      <section className={styles.forgotPass}>
         <Link to={'/'}>Forgot Password ?</Link>
       </section>
 
-      <button
-        type="submit"
-        className="bg-yellow text-white w-full text-lg mt-10 h-14 block rounded-md"
-      >
+      <button type="submit" className={styles.btn}>
         {isLoading ? (
           <img className="w-12 m-auto" src={loadingIcon} alt="loading..." />
         ) : (
@@ -95,7 +102,7 @@ const Login = () => {
         )}
       </button>
 
-      <section className="text-md text-center pt-5 text-darkGrey">
+      <section className={styles.createAcc}>
         Don’t have an Account?
         <Link className="text-yellow pl-1" to={'/signup'}>
           Sign up

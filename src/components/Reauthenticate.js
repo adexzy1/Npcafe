@@ -11,24 +11,32 @@ const Reauthenticate = forwardRef(
 
     const handleCancel = () => {
       setShowModal(false);
+      document.body.style.overflowY = 'initial';
       setIsLoading(false);
     };
 
+    const styles = {
+      wrapper: 'absolute bg-rgba h-full w-full top-0 md:pt-0 flex z-30',
+      container:
+        'bg-white p-5 rounded-lg w-[22rem] md:w-[25rem] relative m-auto',
+      cancelBtn: 'absolute right-5 text-2xl text-yellow',
+      enterPass: 'text-xl font-semibold text-center pt-10',
+      inputWrapper: 'relative',
+      showPass:
+        'absolute top-[30%] text-2xl right-3 text-darkGrey cursor-pointer',
+      btn: 'bg-yellow text-white w-full text-lg mt-10 h-14 block rounded-md',
+    };
+
     return (
-      <section className="absolute bg-rgba h-screen w-full top-0 px-5 pt-[30%] z-30">
-        <section className="bg-white p-5 rounded-lg">
-          <button
-            onClick={handleCancel}
-            className="absolute right-10 text-2xl text-yellow"
-          >
+      <section className={styles.wrapper}>
+        <section className={styles.container}>
+          <button onClick={handleCancel} className={styles.cancelBtn}>
             <MdOutlineCancel />
           </button>
 
-          <section className="text-xl font-semibold text-center pt-10">
-            Enter Password
-          </section>
+          <section className={styles.enterPass}>Enter Password</section>
 
-          <div className="relative">
+          <div className={styles.inputWrapper}>
             <Input
               label="Password"
               name="password"
@@ -40,16 +48,13 @@ const Reauthenticate = forwardRef(
 
             <div
               onClick={() => setShowPass((prev) => !prev)}
-              className="absolute top-[30%] text-2xl right-3 text-darkGrey"
+              className={styles.showPass}
             >
               {showPass ? <AiFillEyeInvisible /> : <AiFillEye />}
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="bg-yellow text-white w-full text-lg mt-10 h-14 block rounded-md"
-          >
+          <button type="submit" className={styles.btn}>
             {isLoading ? (
               <img className="w-12 m-auto" src={loadingIcon} alt="loading..." />
             ) : (

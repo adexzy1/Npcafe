@@ -25,27 +25,38 @@ const Wallet = () => {
     }
   }, [user]);
 
+  const styles = {
+    wrapper: 'pt-5 pb-28 px-5 min-h-screen',
+    balanceSection: 'pb-2 pt-10 flex justify-between items-end md:w-[27rem]',
+    balP: 'text-grey',
+    balSpan: 'text-2xl font-semibold',
+    addFunds: 'bg-grey  text-xs p-3 rounded-md md:bg-white',
+    transacSection: 'mt-10',
+    transacH5: 'font-semibold pb-5',
+    img: 'w-16 m-auto',
+  };
+
   return (
-    <section className="pt-5 pb-28">
+    <section className={styles.wrapper}>
       <TopBar text={'Wallet'} link={'/'} />
 
-      <div className="px-5 pb-2 pt-10 flex justify-between items-end">
+      <div className={styles.balanceSection}>
         <div>
-          <p className="text-grey">Total Balance</p>
-          <span className="text-2xl font-semibold">₦{50000}</span>
+          <p className={styles.balP}>Total Balance</p>
+          <span className={styles.balSpan}>Bal: ₦{50000}</span>
         </div>
 
-        <button className="bg-grey  text-xs p-3 rounded-md ">ADD FUNDS</button>
+        <button className={styles.addFunds}>ADD FUNDS</button>
       </div>
 
       <CreditCard />
 
-      <section className="mt-10 px-5">
-        <h5 className="font-semibold pb-5">Transactions</h5>
+      <section className={styles.transacSection}>
+        <h5 className={styles.transacH5}>Recent Transactions</h5>
 
         {transactions?.length === 0 ? (
           <>
-            <img src={loadingIcon} alt="loading.." className="w-16 m-auto" />
+            <img src={loadingIcon} alt="loading.." className={styles.img} />
           </>
         ) : (
           <>

@@ -24,18 +24,25 @@ const Orders = () => {
     }
   }, [user]);
 
-  return (
-    <section className="pt-5 pb-28">
-      <TopBar text="Orders" link={'/'} />
+  const styles = {
+    wrapper: 'pt-5 pb-28 px-5 min-h-screen',
+    topContainer: 'md:flex items-center justify-between',
+    transactions: 'mt-10',
+    img: 'w-16 m-auto',
+  };
 
-      <section className="px-5">
+  return (
+    <section className={styles.wrapper}>
+      <section className={styles.topContainer}>
+        <TopBar text="Orders" link={'/'} />
+
         <SearchBar items={transactions} />
       </section>
 
-      <section className="mt-10 px-5">
+      <section className={styles.transactions}>
         {transactions.length === 0 ? (
           <>
-            <img src={loadingIcon} alt="loading.." className="w-16 m-auto" />
+            <img src={loadingIcon} alt="loading.." className={styles.img} />
           </>
         ) : (
           <>

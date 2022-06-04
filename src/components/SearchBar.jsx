@@ -34,7 +34,7 @@ const SearchBar = ({ items }) => {
   };
 
   return (
-    <section className="relative flex items-center justify-center bg-grey py-4 px-3 rounded-3xl mt-3">
+    <section className="relative flex items-center justify-center bg-grey py-4 px-3 rounded-3xl mt-3 md:bg-white flex-[0.3] md:min-w-[14rem] md:mt-0">
       <input
         onChange={handleChange}
         placeholder="Search by food name"
