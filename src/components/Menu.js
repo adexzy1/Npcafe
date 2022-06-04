@@ -6,16 +6,29 @@ import { IoSettingsOutline } from 'react-icons/io5';
 import { IoMdLogOut } from 'react-icons/io';
 import { RiUserReceived2Line } from 'react-icons/ri';
 import NavLinks from './NavLinks';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { auth } from '../config/firebase';
 import { toast } from 'react-toastify';
+import { logOut } from '../Redux/UserSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Menu = ({ toggle, setToggle }) => {
+  // redux hooks
   const { user } = useSelector((state) => state.user);
+  const dipatch = useDispatch();
 
-  const handleLogOut = () => {
+  // react router dom hooks
+  const navigate = useNavigate();
+
+  const handleLogOut = async () => {
     setToggle(false);
-    auth.signOut();
+
+    await auth.signOut();
+
+    dipatch(logOut());
+
+    navigate('/');
+
     toast.success('Logged Out Success');
   };
 

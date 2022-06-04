@@ -31,7 +31,6 @@ const Settings = () => {
   const address = watch('address', user?.address ? user.address : '');
 
   const onSubmit = async (data) => {
-    console.log(data);
     setIsLoading(true);
 
     // save settings in database

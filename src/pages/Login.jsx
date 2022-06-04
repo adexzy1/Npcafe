@@ -8,18 +8,26 @@ import useLogin from '../hooks/useLogin';
 import useHandleError from '../hooks/useHandleError';
 import { toast } from 'react-toastify';
 import loadingIcon from '../assets/loading.svg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import loginSchema from '../Schema/loginSchema';
 
 const Login = () => {
+  // state
   const [showPass, setShowPass] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  //  react-router-dom hooks
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/';
+
+  // custom hooks
   const { handleSubmit, errors, register } = useValidation(loginSchema);
   const [handleError] = useHandleError();
-  const navigate = useNavigate();
   const [login] = useLogin();
 
+  // sunmit form function
   const onSubmit = async (data) => {
     setIsLoading(true);
     // login function
@@ -33,7 +41,7 @@ const Login = () => {
       toast.success('You are logged in successfully');
       // navigate to dashboard
       setTimeout(() => {
-        navigate('/');
+        navigate(from, { replace: true });
       }, 750);
     } else {
       // set loading to false

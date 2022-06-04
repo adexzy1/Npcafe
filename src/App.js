@@ -15,6 +15,7 @@ import Onboarding from './layouts/Onboarding';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Transaction from './components/transaction';
+import Loading from './components/Loading';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, DB } from './config/firebase';
 import { setUser } from './Redux/UserSlice';
@@ -23,8 +24,7 @@ import { onValue, ref } from 'firebase/database';
 
 function App() {
   // state
-  const [userId, setUserId] = useState({});
-
+  const [isLoading, setIsLoading] = useState(true);
   // Redux hooks
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
@@ -40,9 +40,6 @@ function App() {
       if (currentUser) {
         // destructure the currentuser object
         const { displayName, email, uid, photoURL } = currentUser;
-
-        // userId for protected Routes
-        setUserId(uid);
 
         const dbRef = ref(DB, 'users/' + currentUser.uid);
 
@@ -60,43 +57,54 @@ function App() {
             })
           );
         });
+
+        // stop loading state
+        setIsLoading(false);
       } else {
         dispatch(setUser(null));
+        // stop loading state
+        setIsLoading(false);
       }
     });
   }, [dispatch]);
 
   return (
     <div className="App">
-      <ToastContainer
-        theme="dark"
-        autoClose={1000}
-        hideProgressBar={true}
-        pauseOnHover={true}
-        position="top-right"
-      />
+      {isLoading && <Loading />}
 
-      <Routes>
-        <Route element={<PageLayout />}>
-          <Route path="/" element={<Home />} />
+      {!isLoading && (
+        <>
+          <ToastContainer
+            theme="dark"
+            autoClose={1000}
+            hideProgressBar={true}
+            pauseOnHover={true}
+            position="top-right"
+          />
 
-          {/* protected Routes */}
-          <Route element={<RequireAuth userId={userId} />}>
-            <Route path="/favourites" element={<Favourites />} />
-            <Route path="/wallet" element={<Wallet />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/orders/:id" element={<Transaction />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route>
-        </Route>
+          <Routes>
+            <Route element={<PageLayout />}>
+              <Route path="/" element={<Home />} />
 
-        <Route element={<Onboarding />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Route>
+              {/* protected Routes */}
+              <Route element={<RequireAuth />}>
+                <Route path="/favourites" element={<Favourites />} />
+                <Route path="/wallet" element={<Wallet />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/orders/:id" element={<Transaction />} />
+                <Route path="/settings" element={<Settings />} />
+              </Route>
+            </Route>
 
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
+            <Route element={<Onboarding />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </Route>
+
+            <Route path="/cart" element={<Cart />} />
+          </Routes>
+        </>
+      )}
     </div>
   );
 }
