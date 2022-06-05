@@ -1,12 +1,12 @@
 import SearchBar from '../components/SearchBar';
 import TopBar from '../components/TopBar';
-import Transaction from '../components/Transaction';
 import loadingIcon from '../assets/loading.svg';
 import { DB } from '../config/firebase';
 import { onValue, ref } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import OrderCollection from '../components/OrderCollection';
+import Transaction from '../components/transaction';
 
 const Orders = () => {
   // state
