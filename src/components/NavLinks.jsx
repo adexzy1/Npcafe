@@ -5,10 +5,9 @@ const NavLinks = ({ children, to, icon, ...props }) => {
   let match = useMatch({ path: resolved.pathname, end: true });
 
   const style = {
-    link: `flex items-center py-3 mb-2 gap-2 hover:bg-yellow hover:text-white rounded-lg whitespace-nowrap px-2 md:text-sm ${
+    link: `flex items-center py-3 mb-2 gap-2 hover:bg-yellow hover:text-white rounded-lg whitespace-nowrap px-2 md:text-sm  hover:bg-yellowDark ${
       match && 'bg-yellow text-white'
     }`,
-    icon: ``,
   };
 
   const handleToggle = () => {
@@ -22,7 +21,7 @@ const NavLinks = ({ children, to, icon, ...props }) => {
   return (
     <div onClick={handleToggle}>
       <Link className={style.link} to={to}>
-        <i className={style.icon}>{icon}</i>
+        <i>{icon}</i>
         {children}
       </Link>
     </div>

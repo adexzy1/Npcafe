@@ -12,13 +12,15 @@ const TopBar = ({ text, link }) => {
 
   return (
     <section className={styles.wrapper}>
-      <button
-        type="button"
-        onClick={() => navigate(link)}
-        className={styles.btn}
-      >
-        <HiOutlineArrowNarrowLeft />
-      </button>
+      {link && (
+        <button
+          type="button"
+          onClick={() => navigate(link)}
+          className={styles.btn}
+        >
+          <HiOutlineArrowNarrowLeft />
+        </button>
+      )}
 
       <h1 className={styles.h1}>{text}</h1>
     </section>

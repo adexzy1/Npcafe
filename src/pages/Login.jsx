@@ -59,8 +59,9 @@ const Login = () => {
       'absolute top-[30%] text-2xl right-3 text-darkGrey cursor-pointer',
     inputWrapper: 'relative',
     forgotPass: 'text-darkGrey text-sm pt-3 text-right',
-    btn: 'bg-yellow text-white w-full text-lg mt-10 h-14 block rounded-md',
+    btn: 'bg-yellow text-white w-full text-lg mt-10 h-14 block rounded-md hover:bg-yellowDark',
     createAcc: 'text-md text-center pt-5 text-darkGrey',
+    signup: 'text-yellow pl-1',
   };
 
   return (
@@ -104,7 +105,7 @@ const Login = () => {
 
       <section className={styles.createAcc}>
         Don’t have an Account?
-        <Link className="text-yellow pl-1" to={'/signup'}>
+        <Link className={styles.signup} to={'/signup'}>
           Sign up
         </Link>
       </section>

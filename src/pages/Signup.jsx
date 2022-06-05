@@ -44,8 +44,9 @@ const Signup = () => {
     inputWrapper: 'relative',
     showPass:
       'absolute top-[30%] text-2xl right-3 text-darkGrey cursor-pointer',
-    btn: 'bg-yellow text-white w-full text-lg mt-10 h-14 block rounded-md',
-    login: 'text-md text-center pt-5 text-darkGrey',
+    btn: 'bg-yellow text-white w-full text-lg mt-10 h-14 block rounded-md rounded-md hover:bg-yellowDark',
+    loginWrapper: 'text-md text-center pt-5 text-darkGrey',
+    login: 'text-yellow pl-1',
   };
 
   return (
@@ -91,9 +92,9 @@ const Signup = () => {
         )}
       </button>
 
-      <section className={styles.login}>
+      <section className={styles.loginWrapper}>
         Already have an Account?
-        <Link className="text-yellow pl-1" to={'/login'}>
+        <Link className={styles.login} to={'/login'}>
           Log in
         </Link>
       </section>

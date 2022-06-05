@@ -1,48 +1,59 @@
-import { useNavigate } from 'react-router-dom';
-
-const TransactionsCard = ({ orderItem, item, index }) => {
-  const navigate = useNavigate();
-
-  const handleNavigate = () => {
+const TransactionsCard = ({
+  orderItem,
+  item,
+  setActiveTransaction,
+  setShowModal,
+}) => {
+  const handleClick = () => {
     if (!orderItem) {
-      navigate(`/orders/${index}`);
+      setActiveTransaction(item.name);
+      setShowModal(true);
     } else {
     }
   };
 
+  const styles = {
+    wrapper: `${
+      !orderItem && 'cursor-pointer'
+    } h-20 flex bg-grey md:bg-white  items-center justify-between py-2 px-3 rounded-lg mb-3 md:mb-5`,
+    date: 'text-gray-400 text-xs',
+    p: 'font-semibold',
+    orderItem: 'flex items-center',
+    imgWrapper: 'w-16 mr-3',
+    quantity: 'flex gap-1',
+    total: 'text-right',
+    name: 'font-semibold text-xl',
+    status: `${
+      item.status === 'Completed' ? 'text-green-400' : 'text-yellow'
+    } ${item.status === 'Canceled' && 'text-[#c8161d]'} text-xs`,
+  };
+
   return (
-    <section
-      onClick={handleNavigate}
-      className=" h-20 flex bg-grey  items-center justify-between py-2 px-3 rounded-lg mb-3"
-    >
+    <section onClick={handleClick} className={styles.wrapper}>
       {/* render this if its a transaction in an order component */}
       {orderItem && (
-        <div className="flex items-center">
-          <section className="w-16 mr-3">
+        <div className={styles.orderItem}>
+          <section className={styles.imgWrapper}>
             <img src={item.img} alt={item.name} />
           </section>
-
-          <p className="font-semibold">{item.name}</p>
+          <div className={styles.quantity}>
+            <span>{item.qty} x</span>
+            <p className={styles.p}>{item.name}</p>
+          </div>
         </div>
       )}
 
       {/* render this for the order component */}
       {!orderItem && (
         <section className="">
-          <p className="font-semibold text-xl">{item.name}</p>
-          <span
-            className={`${
-              item.status === 'Completed' ? 'text-green-400' : 'text-yellow'
-            } ${item.status === 'Canceled' && 'text-[#c8161d]'} text-xs`}
-          >
-            {item.status}
-          </span>
+          <p className={styles.name}>{item.name}</p>
+          <span className={styles.status}>{item.status}</span>
         </section>
       )}
 
-      <div className="text-right">
-        <p className="font-semibold">₦{item.total ? item.total : item.price}</p>
-        <span className="text-gray-400 text-xs">{item.date}</span>
+      <div className={styles.total}>
+        <p className={styles.p}>₦{item.total ? item.total : item.price}</p>
+        <span className={styles.date}>{item.date}</span>
       </div>
     </section>
   );

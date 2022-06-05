@@ -5,83 +5,211 @@
       "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/pizza_1bzlLGFu2.png",
       "name": "Italian Pizza",
       "price": 1200,
-      "rating": [1, 2, 3, 4]
+      "rating": [1, 2, 3, 4],
+      "isFavourite": false
     },
     {
       " rating": [1, 2, 3, 4, 5],
       "id": "l3n05fba",
       "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/peperoniPizza_Dwzwmoa6xl.png",
       "name": "Peperoni Pizza",
-      "price": 1500
+      "price": 1500,
+      "isFavourite": false
     },
     {
       "id": "l3n08a3y",
       "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/dodgerDog_4E5IZrSrd.png",
       "name": "Dodger Dog",
       "price": 350,
-      "rating": [1, 2, 3]
+      "rating": [1, 2, 3],
+      "isFavourite": false
     },
     {
       " rating": [1, 2, 3, 4, 5],
       "id": "l3n095r7",
       "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/mushroomPizza_PMLk1oi3Og.png",
       "name": "Mushroom Pizza",
-      "price": 3000
+      "price": 3000,
+      "isFavourite": false
     },
     {
       "id": "l3n095r8",
       "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/dixieDog_ulY2mUjDf.png",
       "name": "Dixie Dog",
       "price": 500,
-      "rating": [1, 2, 3, 4, 5]
+      "rating": [1, 2, 3, 4, 5],
+      "isFavourite": false
     },
     {
       "id": "l3n0auj7 ",
       "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/AmericanPizza_OO9Q9c0mC.png",
       "name": "American Pizza",
       "price": 2600,
-      "rating": [1, 2, 3, 4, 5]
+      "rating": [1, 2, 3, 4, 5],
+      "isFavourite": false
     },
     {
       "id": "l3n0by6f",
       "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/greekPizza_1qqfkWhKw.png",
       "name": "Greek Pizza",
       "price": 2500,
-      "rating": [1, 2, 3, 4]
+      "rating": [1, 2, 3, 4],
+      "isFavourite": false
     },
     {
       "id": "l3n0b8g1",
       "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/chicagoDog_2ELeS8-v4.png",
       "name": "Chicago Dog",
       "price": 1000,
-      "rating": [1, 2, 3, 4]
+      "rating": [1, 2, 3, 4],
+      "isFavourite": false
     }
   ],
 
   "transactions": {
     "D55GOWjA6fQ85RW5aRqiCHDPKTJ2": [
       {
-        "id": "Order#1",
+        "name": "Order#1",
         "total": 3050,
         "date": "01 june 2022, 17:12",
+        "status": "Pending",
         "details": [
           {
             "id": "l3mzqzcx",
             "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/pizza_1bzlLGFu2.png",
             "name": "Italian Pizza",
-            "price": 1200
+            "price": 1200,
+            "qty": 3
           },
           {
             "id": "l3n05fba",
             "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/peperoniPizza_Dwzwmoa6xl.png",
             "name": "Peperoni Pizza",
-            "price": 1500
+            "price": 1500,
+            "qty": 1
           },
           {
             "id": "l3n08a3y",
             "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/dodgerDog_4E5IZrSrd.png",
             "name": "Dodger Dog",
-            "price": 350
+            "price": 350,
+            "qty": 4
+          }
+        ]
+      },
+      {
+        "name": "Order#2",
+        "total": 3050,
+        "date": "01 june 2022, 17:12",
+        "status": "Completed",
+        "details": [
+          {
+            "id": "l3n0b8g1",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/chicagoDog_2ELeS8-v4.png",
+            "name": "Chicago Dog",
+            "price": 1000,
+            "qty": 1
+          },
+          {
+            "id": "l3n05fba",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/peperoniPizza_Dwzwmoa6xl.png",
+            "name": "Peperoni Pizza",
+            "price": 1500,
+            "qty": 5
+          },
+          {
+            "id": "l3n0auj7 ",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/AmericanPizza_OO9Q9c0mC.png",
+            "name": "American Pizza",
+            "price": 2600,
+            "qty": 2
+          }
+        ]
+      },
+      {
+        "name": "Order#3",
+        "total": 3050,
+        "date": "01 june 2022, 17:12",
+        "status": "Pending",
+        "details": [
+          {
+            "id": "l3mzqzcx",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/pizza_1bzlLGFu2.png",
+            "name": "Italian Pizza",
+            "price": 1200,
+            "qty": 1
+          },
+          {
+            "id": "l3n05fba",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/peperoniPizza_Dwzwmoa6xl.png",
+            "name": "Peperoni Pizza",
+            "price": 1500,
+            "qty": 1
+          },
+          {
+            "id": "l3n08a3y",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/dodgerDog_4E5IZrSrd.png",
+            "name": "Dodger Dog",
+            "price": 350,
+            "qty": 1
+          }
+        ]
+      },
+      {
+        "name": "Order#4",
+        "total": 3050,
+        "date": "01 june 2022, 17:12",
+        "status": "Canceled",
+        "details": [
+          {
+            "id": "l3mzqzcx",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/pizza_1bzlLGFu2.png",
+            "name": "Italian Pizza",
+            "price": 1200,
+            "qty": 3
+          },
+          {
+            "id": "l3n05fba",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/peperoniPizza_Dwzwmoa6xl.png",
+            "name": "Peperoni Pizza",
+            "price": 1500,
+            "qty": 2
+          },
+          {
+            "id": "l3n08a3y",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/dodgerDog_4E5IZrSrd.png",
+            "name": "Dodger Dog",
+            "price": 350,
+            "qty": 1
+          }
+        ]
+      },
+      {
+        "name": "Order#5",
+        "total": 3050,
+        "date": "01 june 2022, 17:12",
+        "status": "Completed",
+        "details": [
+          {
+            "id": "l3mzqzcx",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/pizza_1bzlLGFu2.png",
+            "name": "Italian Pizza",
+            "price": 1200,
+            "qty": 2
+          },
+          {
+            "id": "l3n05fba",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/peperoniPizza_Dwzwmoa6xl.png",
+            "name": "Peperoni Pizza",
+            "price": 1500,
+            "qty": 7
+          },
+          {
+            "id": "l3n08a3y",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/dodgerDog_4E5IZrSrd.png",
+            "name": "Dodger Dog",
+            "price": 350,
+            "qty": 4
           }
         ]
       }
@@ -89,27 +217,147 @@
 
     "2h0GOBFTkoSDTJjKbXe5XvaIr2l2": [
       {
-        "id": "Order#1",
+        "name": "Order#1",
         "total": 6100,
         "date": "30 May 2022, 20:45",
+        "status": "Completed",
         "details": [
           {
             "id": "l3n0auj7 ",
             "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/AmericanPizza_OO9Q9c0mC.png",
             "name": "American Pizza",
-            "price": 2600
+            "price": 2600,
+            "qty": 1
           },
           {
             "id": "l3n0by6f",
             "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/greekPizza_1qqfkWhKw.png",
             "name": "Greek Pizza",
-            "price": 2500
+            "price": 2500,
+            "qty": 6
+          },
+          {
+            "id": "l3n05fba",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/peperoniPizza_Dwzwmoa6xl.png",
+            "name": "Peperoni Pizza",
+            "price": 1500,
+            "qty": 2
+          }
+        ]
+      },
+      {
+        "name": "Order#2",
+        "total": 6100,
+        "date": "30 May 2022, 20:45",
+        "status": "Pending",
+        "details": [
+          {
+            "id": "l3n0auj7 ",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/AmericanPizza_OO9Q9c0mC.png",
+            "name": "American Pizza",
+            "price": 2600,
+            "qty": 1
+          },
+          {
+            "id": "l3n0by6f",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/greekPizza_1qqfkWhKw.png",
+            "name": "Greek Pizza",
+            "price": 2500,
+            "qty": 1
           },
           {
             "id": "l3n0b8g1",
             "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/chicagoDog_2ELeS8-v4.png",
             "name": "Chicago Dog",
-            "price": 1000
+            "price": 1000,
+            "qty": 1
+          }
+        ]
+      },
+      {
+        "name": "Order#3",
+        "total": 6100,
+        "date": "30 May 2022, 20:45",
+        "status": "Canceled",
+        "details": [
+          {
+            "id": "l3n0auj7 ",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/AmericanPizza_OO9Q9c0mC.png",
+            "name": "American Pizza",
+            "price": 2600,
+            "qty": 4
+          },
+          {
+            "id": "l3n0by6f",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/greekPizza_1qqfkWhKw.png",
+            "name": "Greek Pizza",
+            "price": 2500,
+            "qty": 1
+          },
+          {
+            "id": "l3n0b8g1",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/chicagoDog_2ELeS8-v4.png",
+            "name": "Chicago Dog",
+            "price": 1000,
+            "qty": 5
+          }
+        ]
+      },
+      {
+        "name": "Order#4",
+        "total": 6100,
+        "date": "30 May 2022, 20:45",
+        "status": "Completed",
+        "details": [
+          {
+            "id": "l3n0auj7 ",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/AmericanPizza_OO9Q9c0mC.png",
+            "name": "American Pizza",
+            "price": 2600,
+            "qty": 3
+          },
+          {
+            "id": "l3n0by6f",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/greekPizza_1qqfkWhKw.png",
+            "name": "Greek Pizza",
+            "price": 2500,
+            "qty": 2
+          },
+          {
+            "id": "l3n0b8g1",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/chicagoDog_2ELeS8-v4.png",
+            "name": "Chicago Dog",
+            "price": 1000,
+            "qty": 2
+          }
+        ]
+      },
+      {
+        "name": "Order#5",
+        "total": 6100,
+        "date": "30 May 2022, 20:45",
+        "status": "Canceled",
+        "details": [
+          {
+            "id": "l3n0auj7 ",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/AmericanPizza_OO9Q9c0mC.png",
+            "name": "American Pizza",
+            "price": 2600,
+            "qty": 4
+          },
+          {
+            "id": "l3n0by6f",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/greekPizza_1qqfkWhKw.png",
+            "name": "Greek Pizza",
+            "price": 2500,
+            "qty": 4
+          },
+          {
+            "id": "l3n0b8g1",
+            "img": "https://ik.imagekit.io/oz87xfgij/storeImg/tr:w-240/chicagoDog_2ELeS8-v4.png",
+            "name": "Chicago Dog",
+            "price": 1000,
+            "qty": 4
           }
         ]
       }

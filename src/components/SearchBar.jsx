@@ -47,7 +47,7 @@ const SearchBar = ({ items }) => {
         }}
       />
 
-      <div className="text-xl">
+      <div className="text-xl cursor-pointer">
         {searchedText.length !== 0 ? (
           <IoCloseOutline onClick={clearInput} />
         ) : (

@@ -55,21 +55,25 @@ const Settings = () => {
   };
 
   const styles = {
-    wrapper: 'min-h-screen pt-5 md:pt-8 pb-28 relative',
-    inputContainer: 'px-5 lg:w-[70%]',
-    uploadAvatar: 'md:mt-20',
+    wrapper: 'min-h-screen pt-5 md:pt-8 pb-28 md:pb-10 relative',
+    inputContainer:
+      'md:p-10 md:rounded-xl lg:w-[70%] md:bg-white md:mx-auto md:mt-10',
+    topbar: 'px-5',
+    form: 'px-5',
     uploadAvatarText: 'text-sm pt-2',
     formGroup: 'md:flex gap-12 md:pt-5',
     saveChanges:
-      'bg-yellow text-white w-full text-lg mt-10 h-14 block rounded-md md:w-1/2 md:mx-auto md:mt-14',
+      'bg-yellow hover:bg-yellowDark text-white w-full text-lg mt-10 h-14 block rounded-md md:w-1/2 md:mx-auto md:mt-14',
   };
 
   return (
     <section className={styles.wrapper}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <section className={styles.inputContainer}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.topbar}>
           <TopBar text={'Settings'} link={'/'} />
+        </div>
 
+        <section className={styles.inputContainer}>
           <section className={styles.uploadAvatar}>
             <UploadAvatar {...register('photoUrl')} setValue={setValue} />
             <p className={styles.uploadAvatarText}>Upload Avatar</p>

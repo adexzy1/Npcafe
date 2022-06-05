@@ -14,7 +14,6 @@ import PageLayout from './layouts/PageLayout';
 import Onboarding from './layouts/Onboarding';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Transaction from './components/transaction';
 import Loading from './components/Loading';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, DB } from './config/firebase';
@@ -25,9 +24,18 @@ import { onValue, ref } from 'firebase/database';
 function App() {
   // state
   const [isLoading, setIsLoading] = useState(true);
+  const [hideCartRoute, setHideCartRoute] = useState(false);
   // Redux hooks
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
+
+  // hide cart route
+  useEffect(() => {
+    const width = window.screen.width;
+    if (width >= 768) {
+      setHideCartRoute(true);
+    }
+  }, []);
 
   // get the number of total cart items
   useEffect(() => {
@@ -91,7 +99,6 @@ function App() {
                 <Route path="/favourites" element={<Favourites />} />
                 <Route path="/wallet" element={<Wallet />} />
                 <Route path="/orders" element={<Orders />} />
-                <Route path="/orders/:id" element={<Transaction />} />
                 <Route path="/settings" element={<Settings />} />
               </Route>
             </Route>
@@ -101,7 +108,7 @@ function App() {
               <Route path="/signup" element={<Signup />} />
             </Route>
 
-            <Route path="/cart" element={<Cart />} />
+            {!hideCartRoute && <Route path="/cart" element={<Cart />} />}
           </Routes>
         </>
       )}

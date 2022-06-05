@@ -5,6 +5,7 @@ const Onboarding = () => {
     wrapper: 'px-5',
     logo: 'text-6xl font-bold pt-10 text-center',
     logoSub: 'text-2xl text-yellow',
+    outlet: 'pt-10',
   };
 
   return (
@@ -19,7 +20,7 @@ const Onboarding = () => {
             </p>
           </Link>
 
-          <section className="pt-10">
+          <section className={style.outlet}>
             <Outlet />
           </section>
         </section>

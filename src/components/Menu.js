@@ -39,6 +39,8 @@ const Menu = ({ toggle, setToggle }) => {
     logoWrapper: 'hidden md:block text-center py-3 mb-20 border-b',
     logo: 'text-5xl font-bold',
     logoSub: 'text-2xl text-yellow',
+    btnWrapper: 'md:mt-[10rem]',
+    btn: 'flex w-full items-center py-3 mb-2 gap-2 hover:px-2 hover:text-white rounded-lg px-2 hover:bg-yellowDark text-sm',
   };
 
   return (
@@ -77,12 +79,9 @@ const Menu = ({ toggle, setToggle }) => {
         Settings
       </NavLinks>
 
-      <div className="md:mt-[10rem]">
+      <div className={style.btnWrapper}>
         {user ? (
-          <button
-            className="flex w-full items-center py-3 mb-2 gap-2 hover:bg-yellow hover:px-2 hover:text-white rounded-lg px-2 "
-            onClick={handleLogOut}
-          >
+          <button className={style.btn} onClick={handleLogOut}>
             <IoMdLogOut /> Log Out
           </button>
         ) : (

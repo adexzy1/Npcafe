@@ -12,7 +12,7 @@ const CreditCard = () => {
 
   const styles = {
     wrapper: 'mt-2 min-h-[15rem] rounded-xl',
-    cardContainer: 'relative h-full text-white md:w-[27rem]',
+    cardContainer: 'relative h-full text-white md:w-[27rem] md:m-auto',
     cardImg: 'w-full h-full',
     cardDetailsContainer: 'absolute bottom-0 px-7 w-full',
     Cvv: 'text-right pb-5',
