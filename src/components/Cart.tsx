@@ -2,11 +2,18 @@ import CartCard from './CartCard';
 import { IoBasketOutline } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 import { AiOutlineRollback } from 'react-icons/ai';
-
+import { RootState } from '../Redux/store';
 import { useNavigate } from 'react-router-dom';
+import { cartItems } from '../Model';
 
-const Cart = ({ setShowCart }) => {
-  const { cartItems, totalPrice } = useSelector((state) => state.cart);
+interface props {
+  setShowCart?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Cart = ({ setShowCart }: props) => {
+  const { cartItems, totalPrice } = useSelector(
+    (state: RootState) => state.cart
+  );
 
   const navigate = useNavigate();
   // const dispatch = useDispatch();
@@ -14,7 +21,7 @@ const Cart = ({ setShowCart }) => {
   const handleNavigate = () => {
     const width = window.screen.width;
     if (width >= 768) {
-      setShowCart(false);
+      setShowCart!(false);
     } else {
       navigate('/');
     }
@@ -29,7 +36,7 @@ const Cart = ({ setShowCart }) => {
             className="flex items-center text-sm gap-1  rounded-2xl p-1 cursor-pointer"
           >
             <AiOutlineRollback className="text-2xl" />
-            {cartItems > 0 ? 'Continue shopping' : 'Back'}
+            {cartItems.length > 0 ? 'Continue shopping' : 'Back'}
           </section>
 
           <h2 className="text-2xl font-bold ">Cart</h2>
@@ -45,7 +52,7 @@ const Cart = ({ setShowCart }) => {
 
         {cartItems.length > 0 ? (
           <section>
-            {cartItems.map((product) => (
+            {cartItems.map((product: cartItems) => (
               <CartCard key={product.id} product={product} />
             ))}
           </section>

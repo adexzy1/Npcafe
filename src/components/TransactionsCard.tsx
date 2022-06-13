@@ -1,13 +1,18 @@
-const TransactionsCard = ({
-  orderItem,
-  item,
-  setActiveTransaction,
-  setShowModal,
-}) => {
+import { transaction } from '../Model';
+interface Props {
+  orderItem?: boolean;
+  item: transaction;
+  setActiveTransaction?: React.Dispatch<React.SetStateAction<string>>;
+  setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const TransactionsCard = ({ ...props }: Props) => {
+  const { orderItem, item, setActiveTransaction, setShowModal } = props;
+
   const handleClick = () => {
     if (!orderItem) {
-      setActiveTransaction(item.name);
-      setShowModal(true);
+      setActiveTransaction!(item.name);
+      setShowModal!(true);
     } else {
     }
   };

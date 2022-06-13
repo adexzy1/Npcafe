@@ -12,7 +12,7 @@ const settingsSchema = yup
         'Enter a valid Email'
       ),
     phone: yup
-      .number('Enter a valid Phone Number')
+      .number()
       .required('Phone Number is required')
       .typeError('Enter a valid Phone Number'),
 

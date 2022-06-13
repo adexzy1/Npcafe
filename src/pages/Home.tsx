@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../hooks/useDispatch';
 import Category from '../components/Category';
 import HeroCard from '../components/HeroCard';
 import Products from '../components/Products';
 import SearchBar from '../components/SearchBar';
 import { getProducts } from '../Redux/ProductSlice';
+import { RootState } from '../Redux/store';
 
 const Home = () => {
   // Redux Hooks
-  const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.products);
+  const dispatch = useAppDispatch();
+  const { products } = useSelector((state: RootState) => state.products);
 
   useEffect(() => {
     dispatch(getProducts());

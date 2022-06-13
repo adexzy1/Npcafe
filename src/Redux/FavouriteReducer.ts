@@ -1,12 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { cartItems } from '../Model';
+
+interface FavoriteInitialState {
+  favouriteItems: cartItems[];
+}
+
+const local_favItems = localStorage.getItem('favouriteItems');
+const initialState: FavoriteInitialState = {
+  favouriteItems: local_favItems ? JSON.parse(local_favItems) : [],
+};
 
 const favouriteReducer = createSlice({
   name: 'favourites',
-  initialState: {
-    favouriteItems: localStorage.getItem('favouriteItems')
-      ? JSON.parse(localStorage.getItem('favouriteItems'))
-      : [],
-  },
+  initialState,
   reducers: {
     addFavourite: (state, action) => {
       const exist = state.favouriteItems.find(

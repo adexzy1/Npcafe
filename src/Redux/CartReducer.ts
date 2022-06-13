@@ -1,23 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { cartItems } from '../Model';
 
-const saveToLocalStorage = (payload) => {
+const saveToLocalStorage = (payload: cartItems[]) => {
   localStorage.setItem('cartItems', JSON.stringify(payload));
+};
+
+interface CartinitialState {
+  cartItems: cartItems[];
+  totalQuantity: number;
+  totalPrice: number;
+  toggleState: boolean;
+}
+
+const local_cartItems = localStorage.getItem('cartItems');
+
+const initialState: CartinitialState = {
+  cartItems: local_cartItems ? JSON.parse(local_cartItems) : [],
+  totalQuantity: 0,
+  totalPrice: 0,
+  toggleState: false,
 };
 
 const cartReducer = createSlice({
   name: 'cart',
-  initialState: {
-    cartItems: localStorage.getItem('cartItems')
-      ? JSON.parse(localStorage.getItem('cartItems'))
-      : [],
-    totalQuantity: 0,
-    totalPrice: 0,
-    toggleState: false,
-  },
+  initialState,
 
   reducers: {
     addToCart: (state, action) => {
-      const exist = state.cartItems.find((x) => x.id === action.payload.id);
+      const exist = state.cartItems.find(
+        (x: cartItems) => x.id === action.payload.id
+      );
       if (exist) {
         exist.qty += 1;
       } else {
@@ -29,13 +41,13 @@ const cartReducer = createSlice({
     reduceItem: (state, action) => {
       const exist = state.cartItems.find((x) => x.id === action.payload.id);
 
-      if (exist.qty <= 1) {
+      if (exist!.qty <= 1) {
         const products = state.cartItems.filter(
           (x) => x.id !== action.payload.id
         );
         state.cartItems = products;
       } else {
-        exist.qty -= 1;
+        exist!.qty -= 1;
       }
       saveToLocalStorage(state.cartItems);
     },

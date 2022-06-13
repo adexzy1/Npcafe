@@ -1,9 +1,12 @@
 import Products from '../components/Products';
 import { useSelector } from 'react-redux';
 import TopBar from '../components/TopBar';
+import { RootState } from '../Redux/store';
 
 const Favourites = () => {
-  const { favouriteItems } = useSelector((state) => state.favourites);
+  const { favouriteItems } = useSelector(
+    (state: RootState) => state.favourites
+  );
 
   const styles = {
     wrapper: 'pt-5 md:pt-8 pb-16 min-h-screen',

@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import OrderCollection from '../components/OrderCollection';
 import Transaction from '../components/transaction';
+import { RootState } from '../Redux/store';
 
 const Orders = () => {
   // state
@@ -15,7 +16,7 @@ const Orders = () => {
   const [showModal, setShowModal] = useState(false);
 
   // Redux Hooks
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (user) {

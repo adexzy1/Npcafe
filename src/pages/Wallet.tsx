@@ -8,15 +8,17 @@ import { useEffect, useState } from 'react';
 import TransactionsCard from '../components/TransactionsCard';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { RootState } from '../Redux/store';
+import { transaction } from '../Model';
 
 const Wallet = () => {
-  const [transactions, setTransactions] = useState([]);
-  const { user } = useSelector((state) => state.user);
+  const [transactions, setTransactions] = useState<transaction[]>([]);
+  const { user } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (user) {
       const getTransactions = () => {
-        const dbRef = ref(DB, `transactions/${auth.currentUser.uid}`);
+        const dbRef = ref(DB, `transactions/${auth.currentUser?.uid}`);
 
         onValue(dbRef, (data) => {
           setTransactions(data.val());
@@ -72,7 +74,7 @@ const Wallet = () => {
           ) : (
             <>
               {transactions.slice(0, 3).map((item, index) => (
-                <TransactionsCard key={item.name} item={item} index={index} />
+                <TransactionsCard key={item.name} item={item} />
               ))}
             </>
           )}

@@ -20,6 +20,7 @@ import { auth, DB } from './config/firebase';
 import { setUser } from './Redux/UserSlice';
 import RequireAuth from './pages/RequireAuth';
 import { onValue, ref } from 'firebase/database';
+import { RootState } from './Redux/store';
 
 function App() {
   // state
@@ -27,15 +28,15 @@ function App() {
   const [hideCartRoute, setHideCartRoute] = useState(false);
   // Redux hooks
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state: RootState) => state.cart);
 
+  const width = window.screen.width;
   // hide cart route
   useEffect(() => {
-    const width = window.screen.width;
     if (width >= 768) {
       setHideCartRoute(true);
     }
-  }, []);
+  }, [width]);
 
   // get the number of total cart items
   useEffect(() => {
