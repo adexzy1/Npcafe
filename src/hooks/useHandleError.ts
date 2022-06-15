@@ -1,5 +1,7 @@
+import { error } from '../Model';
+
 const useHandleError = () => {
-  const handleError = async (error) => {
+  const handleError = async (error: error) => {
     switch (error.code) {
       case 'auth/email-already-in-use':
         return 'Account Already exist please login';

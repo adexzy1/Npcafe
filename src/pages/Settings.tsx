@@ -9,6 +9,9 @@ import { useState } from 'react';
 import useSettings from '../hooks/useSettings';
 import { toast } from 'react-toastify';
 import useHandleError from '../hooks/useHandleError';
+import { RootState } from '../Redux/store';
+import { FieldValues, SubmitHandler } from 'react-hook-form';
+import { error } from '../Model';
 
 const Settings = () => {
   // state
@@ -16,7 +19,7 @@ const Settings = () => {
   const [showModal, setShowModal] = useState(false);
 
   // Redux Hooks
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state: RootState) => state.user);
 
   // custom Hooks
   const { handleSubmit, register, errors, watch, setValue } =
@@ -30,7 +33,7 @@ const Settings = () => {
   const phone = watch('phone', user?.phone ? user.phone : '');
   const address = watch('address', user?.address ? user.address : '');
 
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
 
     // save settings in database
@@ -44,7 +47,7 @@ const Settings = () => {
     } else {
       // set loading to false
       setIsLoading(false);
-      const errorResponse = handleError(response);
+      const errorResponse = await handleError(response as error);
       toast.error(errorResponse);
     }
   };
@@ -74,7 +77,7 @@ const Settings = () => {
         </div>
 
         <section className={styles.inputContainer}>
-          <section className={styles.uploadAvatar}>
+          <section>
             <UploadAvatar {...register('photoUrl')} setValue={setValue} />
             <p className={styles.uploadAvatarText}>Upload Avatar</p>
           </section>
@@ -83,7 +86,6 @@ const Settings = () => {
             <Input
               type={'text'}
               label={'Full Name'}
-              name={'fullName'}
               {...register('fullName')}
               value={fullName}
               error={errors.fullName}
@@ -91,7 +93,6 @@ const Settings = () => {
             <Input
               type={'email'}
               label={'Email'}
-              name={'email'}
               {...register('email')}
               error={errors.email}
               value={email}
@@ -102,7 +103,6 @@ const Settings = () => {
             <Input
               type={'tel'}
               label={'Phone'}
-              name={'phone'}
               {...register('phone')}
               value={phone}
               error={errors.phone}
@@ -110,7 +110,6 @@ const Settings = () => {
             <Input
               type={'text'}
               label={'Address'}
-              name={'address'}
               value={address}
               {...register('address')}
               error={errors.address}

@@ -2,27 +2,35 @@ import avatar from '../assets/avatar.png';
 import { IoCameraOutline } from 'react-icons/io5';
 import { useEffect, useState, forwardRef, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { FieldValues, UseFormSetValue } from 'react-hook-form';
+import { RootState } from '../Redux/store';
 
-const UploadAvatar = forwardRef(({ setValue, ...props }, ref) => {
-  const { user } = useSelector((state) => state.user);
+interface Props {
+  setValue: UseFormSetValue<FieldValues>;
+}
+
+const UploadAvatar = forwardRef<HTMLInputElement, Props>((props, ref) => {
+  const { setValue, ...otherProps } = props;
+
+  const { user } = useSelector((state: RootState) => state.user);
 
   const [uploader, setUploader] = useState(false);
-  const [image, setImage] = useState('');
-  const [filePreview, setFilePreview] = useState('');
+  const [image, setImage] = useState<Blob | null>(null);
+  const [filePreview, setFilePreview] = useState<any>();
 
   // set user avatar
-  const photoUrl = user?.photoUrl ? user.photoURL : avatar;
+  const photoUrl = user?.photoURL ? user.photoURL : avatar;
 
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // handle the image upload
-  const handleUpload = (e) => {
-    const file = e.target.files[0];
-    if (file.type.slice(0, 5) === 'image') {
+  const handleUpload = (files: FileList | null) => {
+    const file = files![0];
+    if (files![0].type.slice(0, 5) === 'image') {
       setImage(file);
       setValue('photoUrl', file);
     } else {
-      setImage('');
+      setImage(null);
     }
   };
 
@@ -36,7 +44,7 @@ const UploadAvatar = forwardRef(({ setValue, ...props }, ref) => {
       };
       fileReader.readAsDataURL(image);
     } else {
-      setFilePreview('');
+      setFilePreview(null);
     }
   }, [image]);
 
@@ -47,7 +55,7 @@ const UploadAvatar = forwardRef(({ setValue, ...props }, ref) => {
       className=" w-[6rem] h-[6rem] rounded-full overflow-hidden relative mt-10 border border-yellow"
     >
       <div
-        onClick={() => inputRef.current.click()}
+        onClick={() => inputRef.current!.click()}
         className={`absolute  ${
           uploader ? 'bottom-0' : 'bottom-[-100%]'
         } h-full w-full flex bg-rgba text-white transition-all duration-300`}
@@ -60,7 +68,7 @@ const UploadAvatar = forwardRef(({ setValue, ...props }, ref) => {
         className="hidden"
         value={photoUrl}
         name="photoUrl"
-        {...props}
+        {...otherProps}
         ref={ref}
       />
 
@@ -70,7 +78,7 @@ const UploadAvatar = forwardRef(({ setValue, ...props }, ref) => {
         name="photoUrl"
         className="hidden"
         ref={inputRef}
-        onChange={(e) => handleUpload(e)}
+        onChange={(e) => handleUpload(e.target.files)}
       />
 
       <img

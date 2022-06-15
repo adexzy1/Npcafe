@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../components/Input';
 import { AiFillEyeInvisible } from 'react-icons/ai';
@@ -8,19 +8,18 @@ import useLogin from '../hooks/useLogin';
 import useHandleError from '../hooks/useHandleError';
 import { toast } from 'react-toastify';
 import loadingIcon from '../assets/loading.svg';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import loginSchema from '../Schema/loginSchema';
+import { FieldValues, SubmitHandler } from 'react-hook-form';
+import { error } from '../Model';
 
 const Login = () => {
   // state
-  const [showPass, setShowPass] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [showPass, setShowPass] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   //  react-router-dom hooks
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const from = location.state?.from?.pathname || '/';
 
   // custom hooks
   const { handleSubmit, errors, register } = useValidation(loginSchema);
@@ -28,7 +27,7 @@ const Login = () => {
   const [login] = useLogin();
 
   // sunmit form function
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
     // login function
     const response = await login(data);
@@ -41,13 +40,13 @@ const Login = () => {
       toast.success('You are logged in successfully');
       // navigate to dashboard
       setTimeout(() => {
-        navigate(from, { replace: true });
+        navigate('/');
       }, 750);
     } else {
       // set loading to false
       setIsLoading(false);
       // handle error function
-      const errorResult = await handleError(response);
+      const errorResult = await handleError(response as error);
       // show error notification
       toast.error(errorResult);
     }
@@ -68,7 +67,6 @@ const Login = () => {
     <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
       <Input
         label="Email"
-        name="email"
         type="email"
         {...register('email')}
         error={errors.email}
@@ -77,7 +75,6 @@ const Login = () => {
       <div className={styles.inputWrapper}>
         <Input
           label="Password"
-          name="password"
           type={showPass ? 'text' : 'password'}
           {...register('password')}
           error={errors.password}
@@ -104,7 +101,7 @@ const Login = () => {
       </button>
 
       <section className={styles.createAcc}>
-        Don’t have an Account?
+        Don&apos;t have an Account?
         <Link className={styles.signup} to={'/signup'}>
           Sign up
         </Link>

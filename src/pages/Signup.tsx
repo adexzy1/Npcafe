@@ -10,6 +10,8 @@ import useHandleError from '../hooks/useHandleError';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import signupSchema from '../Schema/signupSchema';
+import { FieldValues, SubmitHandler } from 'react-hook-form';
+import { error } from '../Model';
 
 const Signup = () => {
   const [showPass, setShowPass] = useState(false);
@@ -20,7 +22,7 @@ const Signup = () => {
   const [signup] = useSignup();
   const navigate = useNavigate();
 
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
     // handle signup
     const response = await signup(data);
@@ -33,7 +35,7 @@ const Signup = () => {
     } else {
       setIsLoading(false);
       // handle Error
-      const errorResponse = await handleError(response);
+      const errorResponse = await handleError(response as error);
       // show notification
       toast.error(errorResponse);
     }
@@ -53,7 +55,6 @@ const Signup = () => {
     <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
       <Input
         label="Full Name"
-        name="fullName"
         type="text"
         {...register('fullName')}
         error={errors.fullName}
@@ -61,7 +62,6 @@ const Signup = () => {
 
       <Input
         label="Email"
-        name="email"
         type="email"
         error={errors.email}
         {...register('email')}
@@ -70,7 +70,6 @@ const Signup = () => {
       <div className={styles.inputWrapper}>
         <Input
           label="Password"
-          name="password"
           type={showPass ? 'text' : 'password'}
           {...register('password')}
           error={errors.password}

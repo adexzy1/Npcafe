@@ -1,13 +1,21 @@
 import css from '../css/Input.module.css';
 import { forwardRef } from 'react';
+import { FieldError } from 'react-hook-form';
 
-const Input = forwardRef(({ name, type, label, error, ...otherProps }, ref) => {
+interface props {
+  type: string;
+  label: string;
+  error: FieldError | undefined;
+  value?: string;
+}
+
+const Input = forwardRef<HTMLInputElement, props>((props, ref) => {
+  const { type, label, error, ...otherProps } = props;
   return (
     <div className={css.wrapper}>
       <input
         className={`${css.input} ${error && css.error}`}
         type={type}
-        name={name}
         placeholder=" "
         {...otherProps}
         ref={ref}

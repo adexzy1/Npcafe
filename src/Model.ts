@@ -38,3 +38,7 @@ export interface transaction extends details {
   status?: string;
   total?: number;
 }
+
+export interface error {
+  code: string;
+}
