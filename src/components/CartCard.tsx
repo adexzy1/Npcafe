@@ -1,8 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { MdCancel } from 'react-icons/md';
 import { addToCart, reduceItem, removeItem } from '../Redux/CartReducer';
+import { cartItems } from '../Model';
 
-const CartCard = ({ product }) => {
+interface Props {
+  product: cartItems;
+}
+
+const CartCard = ({ product }: Props) => {
   const { name, price, img, qty } = product;
   const dispatch = useDispatch();
 

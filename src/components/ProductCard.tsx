@@ -5,15 +5,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { addFavourite } from '../Redux/FavouriteReducer';
 import Rating from './Rating';
+import { RootState } from '../Redux/store';
+import { Product } from '../Model';
 
-const ProductCard = ({ product }) => {
-  const { name, price, img } = product;
+interface props {
+  product: Product;
+}
 
+const ProductCard = ({ product }: props) => {
+  const { name, price, img, id } = product;
   const dispatch = useDispatch();
   const [isFavourite, setIsFavourite] = useState(false);
 
-  const { favouriteItems } = useSelector((state) => state.favourites);
-  const [favouriteIDs, setFavouriteIDs] = useState([]);
+  const { favouriteItems } = useSelector(
+    (state: RootState) => state.favourites
+  );
+  const [favouriteIDs, setFavouriteIDs] = useState<string[]>([]);
   const [fav, setFav] = useState(false);
 
   useEffect(() => {
@@ -28,15 +35,15 @@ const ProductCard = ({ product }) => {
   }, [favouriteItems]);
 
   useEffect(() => {
-    const itemIndex = favouriteIDs.findIndex((x) => x === product.id);
+    const itemIndex = favouriteIDs.findIndex((x) => x === id);
     if (itemIndex >= 0) {
       setFav(true);
     } else {
       setFav(false);
     }
-  }, [favouriteIDs, product]);
+  }, [favouriteIDs, id]);
 
-  const handleFavourite = (product) => {
+  const handleFavourite = (product: Product) => {
     setIsFavourite((prev) => !prev);
     dispatch(addFavourite(product));
   };

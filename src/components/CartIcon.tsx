@@ -1,15 +1,20 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { IoBasketOutline } from 'react-icons/io5';
+import { RootState } from '../Redux/store';
 
-const CartIcon = ({ setShowCart }) => {
+interface Props {
+  setShowCart?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const CartIcon = ({ setShowCart }: Props) => {
   const navigate = useNavigate();
-  const { totalQuantity } = useSelector((state) => state.cart);
+  const { totalQuantity } = useSelector((state: RootState) => state.cart);
 
   const handleNavigate = () => {
     const width = window.screen.width;
     if (width >= 768) {
-      setShowCart(true);
+      setShowCart!(true);
     } else {
       navigate('/cart');
     }

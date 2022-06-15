@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 
 const Filter = () => {
   const [isActive, setIsActive] = useState(false);
-  const [selected, setSelected] = useState('All');
+  const [selected, setSelected] = useState<string | null>('All');
   const options = ['All', 'Pizza', 'Hotdog', 'Tacos', 'Snack', 'Drink'];
 
-  const handleSelectedOption = (e) => {
-    setSelected(e.target.textContent);
+  const handleSelectedOption = (e: MouseEvent<HTMLParagraphElement>) => {
+    setSelected(e.currentTarget.textContent);
     setIsActive(false);
   };
 

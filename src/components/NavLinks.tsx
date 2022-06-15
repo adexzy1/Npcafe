@@ -1,6 +1,14 @@
+import { ReactNode } from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 
-const NavLinks = ({ children, to, icon, ...props }) => {
+interface Props {
+  children: string;
+  to: string;
+  icon: ReactNode;
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const NavLinks = ({ children, to, icon, setToggle }: Props) => {
   let resolved = useResolvedPath(to);
   let match = useMatch({ path: resolved.pathname, end: true });
 
@@ -13,9 +21,9 @@ const NavLinks = ({ children, to, icon, ...props }) => {
   const handleToggle = () => {
     const width = window.screen.width;
     if (width >= 768) {
-      props.setToggle(false);
+      setToggle(false);
     } else {
-      props.setToggle((prev) => !prev);
+      setToggle((prev) => !prev);
     }
   };
   return (

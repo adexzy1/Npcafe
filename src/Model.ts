@@ -1,11 +1,3 @@
-export interface cartItems {
-  id: number;
-  name: string;
-  price: number;
-  img: string;
-  qty: number;
-}
-
 export interface Product {
   id: string;
   name: string;
@@ -13,6 +5,10 @@ export interface Product {
   img: string;
   isFavourite: boolean;
   rating: number[];
+}
+
+export interface cartItems extends Product {
+  qty: number;
 }
 
 export interface user {

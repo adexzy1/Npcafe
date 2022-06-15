@@ -48,24 +48,29 @@ const UploadAvatar = forwardRef<HTMLInputElement, Props>((props, ref) => {
     }
   }, [image]);
 
+  const style = {
+    wrapper:
+      'w-[6rem] h-[6rem] rounded-full overflow-hidden relative mt-10 border border-yellow',
+    img: 'object-cover w-full h-full cursor-pointer',
+    input: ' hidden',
+    div: `absolute  ${
+      uploader ? 'bottom-0' : 'bottom-[-100%]'
+    } h-full w-full flex bg-rgba text-white transition-all duration-300 cursor-pointer`,
+  };
+
   return (
     <section
       onMouseOver={() => setUploader(true)}
       onMouseLeave={() => setUploader(false)}
-      className=" w-[6rem] h-[6rem] rounded-full overflow-hidden relative mt-10 border border-yellow"
+      className={style.wrapper}
     >
-      <div
-        onClick={() => inputRef.current!.click()}
-        className={`absolute  ${
-          uploader ? 'bottom-0' : 'bottom-[-100%]'
-        } h-full w-full flex bg-rgba text-white transition-all duration-300`}
-      >
+      <div onClick={() => inputRef.current!.click()} className={style.div}>
         <IoCameraOutline className="m-auto text-3xl" />
       </div>
 
       <input
         type="text"
-        className="hidden"
+        className={style.input}
         value={photoUrl}
         name="photoUrl"
         {...otherProps}
@@ -76,7 +81,7 @@ const UploadAvatar = forwardRef<HTMLInputElement, Props>((props, ref) => {
         type="file"
         accept="image/*"
         name="photoUrl"
-        className="hidden"
+        className={style.input}
         ref={inputRef}
         onChange={(e) => handleUpload(e.target.files)}
       />
@@ -86,7 +91,7 @@ const UploadAvatar = forwardRef<HTMLInputElement, Props>((props, ref) => {
           filePreview ? filePreview : user?.photoURL ? user.photoURL : avatar
         }
         alt="user avatar"
-        className="object-cover w-full h-full cursor-pointer"
+        className={style.img}
       />
     </section>
   );

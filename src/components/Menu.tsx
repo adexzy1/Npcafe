@@ -11,10 +11,16 @@ import { auth } from '../config/firebase';
 import { toast } from 'react-toastify';
 import { logOut } from '../Redux/UserSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import { RootState } from '../Redux/store';
 
-const Menu = ({ toggle, setToggle }) => {
+interface Props {
+  toggle: boolean;
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Menu = ({ toggle, setToggle }: Props) => {
   // redux hooks
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state: RootState) => state.user);
   const dipatch = useDispatch();
 
   // react router dom hooks

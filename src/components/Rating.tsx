@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { AiTwotoneStar } from 'react-icons/ai';
 
 const Rating = () => {
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
+  const [rating, setRating] = useState<number>();
+  const [hover, setHover] = useState<number | null>();
 
   return (
     <section className="flex">
@@ -20,7 +20,9 @@ const Rating = () => {
               onClick={() => setRating(ratingValue)}
             />
             <AiTwotoneStar
-              className={`${ratingValue <= (hover || rating) && 'text-yellow'}`}
+              className={`${
+                ratingValue <= (hover! || rating!) && 'text-yellow'
+              }`}
               onMouseEnter={() => setHover(ratingValue)}
               onMouseLeave={() => setHover(null)}
             />

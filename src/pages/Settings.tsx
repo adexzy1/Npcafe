@@ -15,8 +15,8 @@ import { error } from '../Model';
 
 const Settings = () => {
   // state
-  const [isLoading, setIsLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   // Redux Hooks
   const { user } = useSelector((state: RootState) => state.user);

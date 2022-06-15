@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { IoCloseOutline } from 'react-icons/io5';
+import { Product } from '../Model';
 
-const SearchBar = ({ items }) => {
+interface props {
+  items: Product[];
+}
+
+const SearchBar = ({ items }: props) => {
   // state
-  const [isActive, setIsActive] = useState(false);
-  const [suggestion, setsuggestion] = useState([]);
-  const [searchedText, setSearchedText] = useState('');
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [suggestion, setsuggestion] = useState<Product[]>([]);
+  const [searchedText, setSearchedText] = useState<string>('');
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchedText(value);
 
@@ -24,7 +29,7 @@ const SearchBar = ({ items }) => {
     }
   };
 
-  const handleSuggestion = (text) => {
+  const handleSuggestion = (text: string) => {
     setSearchedText(text);
     setIsActive(false);
   };

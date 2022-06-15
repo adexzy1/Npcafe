@@ -1,12 +1,11 @@
 import { useSelector } from 'react-redux';
 import pattern from '../assets/Thur.svg';
+import { RootState } from '../Redux/store';
 
 const HeroCard = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state: RootState) => state.user);
 
-  if (user) {
-    var username = user.displayName.split(' ')[0];
-  }
+  let username = user ? user.displayName.split(' ')[0] : '';
 
   const style = {
     container: 'm-5 bg-[#feecd4] flex  rounded-lg overflow-hidden h-[12rem]',

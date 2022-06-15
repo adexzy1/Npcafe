@@ -1,7 +1,12 @@
 import { HiOutlineArrowNarrowLeft } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 
-const TopBar = ({ text, link }) => {
+interface props {
+  text: string;
+  link: string;
+}
+
+const TopBar = ({ text, link }: props) => {
   const navigate = useNavigate();
 
   const styles = {

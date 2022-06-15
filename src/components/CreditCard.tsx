@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { RootState } from '../Redux/store';
 
 const CreditCard = () => {
   const [addCard, setAddCard] = useState(false);
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state: RootState) => state.user);
 
   const CardNumber = () => {
     const number = 1234567890456782;
