@@ -39,7 +39,7 @@ const Menu = ({ toggle, setToggle }: Props) => {
   };
 
   const style = {
-    navWrapper: `px-5 bg-white py-5 w-full  bottom-[4rem] absolute left-0 transform transition-all duration-500 ease-in-out rounded-t-2xl z-[-10] shadow  md:fixed md:w-[12.2rem] md:left-[unset] bottom-[100%] md:w-[100%] md:h-screen md:rounded-none md:shadow-none md:border-r md:border-grey ${
+    navWrapper: `absolute px-5 bg-white py-5 w-full bottom-[4rem] left-0 transform transition-all duration-500 ease-in-out rounded-t-2xl z-[-10] shadow  md:left-[unset] bottom-[100%] md:w-[12rem] md:h-screen md:rounded-none md:shadow-none md:border-r md:border-grey md:fixed ${
       toggle ? 'traslate-y-0' : 'translate-y-[100vh]'
     }`,
     logoWrapper: 'hidden md:block text-center py-3 mb-20 border-b',
