@@ -9,7 +9,7 @@ const Header = () => {
   const [toggle, setToggle] = useState(false);
 
   const style = {
-    headerWrapper: `fixed w-full left-0 bottom-0 z-10 md:h-screen md:w-[12rem]`,
+    headerWrapper: `fixed w-full left-0 bottom-0 z-10 md:h-0 md:w-[12rem] md:relative`,
     nav: 'flex justify-between items-center px-5 py-3 bg-white rounded-t-2xl shadow md:hidden',
     logo: 'text-xl font-bold',
     logoSub: 'text-xs text-yellow',
@@ -22,29 +22,27 @@ const Header = () => {
 
   return (
     <div className={style.headerWrapper}>
-      <section className="relative">
-        <div className={style.nav}>
-          <Link to={'/'}>
-            <p className={style.logo}>
-              NP<span className={style.logoSub}>Cafe</span>
-            </p>
+      <div className={style.nav}>
+        <Link to={'/'}>
+          <p className={style.logo}>
+            NP<span className={style.logoSub}>Cafe</span>
+          </p>
+        </Link>
+
+        <>
+          <CartIcon />
+        </>
+
+        <section className={style.headerRightCol}>
+          <Link to={'/login'}>
+            <BiUserCircle />
           </Link>
 
-          <>
-            <CartIcon />
-          </>
+          <CgMenuGridR onClick={toggleMenu} />
+        </section>
+      </div>
 
-          <section className={style.headerRightCol}>
-            <Link to={'/login'}>
-              <BiUserCircle />
-            </Link>
-
-            <CgMenuGridR onClick={toggleMenu} />
-          </section>
-        </div>
-
-        <Menu toggle={toggle} setToggle={setToggle} />
-      </section>
+      <Menu toggle={toggle} setToggle={setToggle} />
     </div>
   );
 };

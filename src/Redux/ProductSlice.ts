@@ -10,12 +10,12 @@ const getProducts = createAsyncThunk('products/getProducts', async () => {
 
 interface productInitialState {
   products: Product[];
-  loading: 'idle' | 'pending' | 'fulfilled' | 'rejected';
+  loading: 'pending' | 'fulfilled' | 'rejected';
 }
 
 const initialState: productInitialState = {
   products: [],
-  loading: 'idle',
+  loading: 'pending',
 };
 
 const productSlice = createSlice({
@@ -31,6 +31,7 @@ const productSlice = createSlice({
 
     builder.addCase(getProducts.fulfilled, (state, action) => {
       state.products = action.payload;
+      state.loading = action.meta.requestStatus;
     });
 
     builder.addCase(getProducts.rejected, (state, action) => {

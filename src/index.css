@@ -12,3 +12,10 @@ body {
   font-family: 'Poppins', sans-serif;
   color: #343438;
 }
+
+.app {
+  width: 1440px;
+  max-width: 100%;
+  margin: auto;
+  position: relative;
+}

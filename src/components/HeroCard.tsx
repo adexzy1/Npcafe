@@ -8,8 +8,9 @@ const HeroCard = () => {
   let username = user ? user.displayName.split(' ')[0] : '';
 
   const style = {
-    container: 'm-5 bg-[#feecd4] flex  rounded-lg overflow-hidden h-[12rem]',
-    heroWrapper: 'p-5 flex items-center gap-5  w-[50rem] max-w-full m-auto',
+    container:
+      'm-5 max-w-[100%] bg-[#feecd4] flex rounded-lg overflow-hidden sm:h-[12rem] xl:w-[75%] xl:mx-auto',
+    heroWrapper: 'p-5 flex items-center gap-3 flex-1  m-auto',
     h3: 'font-bold text-xl',
     p: 'text-xs py-1',
     btn: 'bg-yellow px-4 py-2 text-sm mt-2 rounded-2xl text-white',
@@ -35,11 +36,11 @@ const HeroCard = () => {
         </div>
       </section>
 
-      <section className="hidden sm:block sm:w-full sm:h-ful">
+      <section className="hidden sm:block flex-1 sm:w-[80%]">
         <img
           src={pattern}
           alt="pattern"
-          className="object-cover sm:w-full sm:h-ful sm:h-full"
+          className="object-cover sm:w-full sm:h-full "
         />
       </section>
     </section>

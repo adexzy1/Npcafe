@@ -21,7 +21,7 @@ const initialState: CartinitialState = {
   toggleState: false,
 };
 
-const cartReducer = createSlice({
+const cartSlice = createSlice({
   name: 'cart',
   initialState,
 
@@ -82,5 +82,5 @@ const cartReducer = createSlice({
 });
 
 export const { addToCart, reduceItem, removeItem, getTotals } =
-  cartReducer.actions;
-export default cartReducer.reducer;
+  cartSlice.actions;
+export default cartSlice.reducer;

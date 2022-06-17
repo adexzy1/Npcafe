@@ -20,17 +20,16 @@ const CartIcon = ({ setShowCart }: Props) => {
     }
   };
 
+  const style = {
+    wrapper:
+      'text-3xl bg-yellow text-white p-3 rounded-full relative  cursor-pointer md:p-5 md:bg-transparent md:text-4xl',
+    span: 'absolute top-0 right-[-5px] bg-[#343438] text-xs flex items-center justify-center px-[10px] py-1 font-bold rounded-full',
+  };
+
   return (
-    <section
-      onClick={handleNavigate}
-      className="text-3xl bg-yellow text-white p-3 rounded-full relative cursor-pointer md:p-5 md:bg-transparent md:text-4xl"
-    >
+    <section onClick={handleNavigate} className={style.wrapper}>
       <IoBasketOutline />
-      {totalQuantity > 0 && (
-        <span className="absolute top-0 right-[-5px] bg-[#343438] text-xs flex items-center justify-center px-[10px] py-1 font-bold rounded-full">
-          {totalQuantity}
-        </span>
-      )}
+      {totalQuantity > 0 && <span className={style.span}>{totalQuantity}</span>}
     </section>
   );
 };

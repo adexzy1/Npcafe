@@ -14,6 +14,7 @@ const Orders = () => {
   const [transactions, setTransactions] = useState([]);
   const [activeTransaction, setActiveTransaction] = useState('Order#1');
   const [showModal, setShowModal] = useState(false);
+  const [searchedText, setSearchedText] = useState<string>('');
 
   // Redux Hooks
   const { user } = useSelector((state: RootState) => state.user);
@@ -45,7 +46,11 @@ const Orders = () => {
         <section className={styles.topContainer}>
           <TopBar text="Orders" link={'/'} />
 
-          <SearchBar items={transactions} />
+          <SearchBar
+            items={transactions}
+            searchedText={searchedText}
+            setSearchedText={setSearchedText}
+          />
         </section>
 
         <section className={styles.transactions}>
@@ -59,6 +64,7 @@ const Orders = () => {
                 transactions={transactions}
                 setActiveTransaction={setActiveTransaction}
                 setShowModal={setShowModal}
+                searchedText={searchedText}
               />
             </>
           )}

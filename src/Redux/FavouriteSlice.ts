@@ -10,7 +10,7 @@ const initialState: FavoriteInitialState = {
   favouriteItems: local_favItems ? JSON.parse(local_favItems) : [],
 };
 
-const favouriteReducer = createSlice({
+const favouriteSlice = createSlice({
   name: 'favourites',
   initialState,
   reducers: {
@@ -33,6 +33,6 @@ const favouriteReducer = createSlice({
   },
 });
 
-export const { addFavourite } = favouriteReducer.actions;
+export const { addFavourite } = favouriteSlice.actions;
 
-export default favouriteReducer.reducer;
+export default favouriteSlice.reducer;

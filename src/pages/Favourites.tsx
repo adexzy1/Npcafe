@@ -2,11 +2,21 @@ import Products from '../components/Products';
 import { useSelector } from 'react-redux';
 import TopBar from '../components/TopBar';
 import { RootState } from '../Redux/store';
+import { useEffect, useState } from 'react';
+import { Product } from '../Model';
 
 const Favourites = () => {
-  const { favouriteItems } = useSelector(
-    (state: RootState) => state.favourites
-  );
+  // State
+  const [favouriteItems, setFavouriteItems] = useState<Product[]>([]);
+
+  // Redux hooks
+  const { products } = useSelector((state: RootState) => state.products);
+
+  // Filter user favourite items
+  useEffect(() => {
+    const favourites = products.filter((x) => x.isFavourite === true);
+    setFavouriteItems(favourites);
+  }, [products]);
 
   const styles = {
     wrapper: 'pt-5 md:pt-8 pb-16 min-h-screen',
@@ -26,7 +36,7 @@ const Favourites = () => {
         {favouriteItems.length > 0 && <Products products={favouriteItems} />}
       </div>
 
-      {favouriteItems.length === 0 && (
+      {favouriteItems.length <= 0 && (
         <section className={styles.noItem}>
           <p>You have no Favorite Items kindly add some</p>
         </section>

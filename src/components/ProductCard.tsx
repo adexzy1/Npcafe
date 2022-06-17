@@ -1,60 +1,55 @@
 import { AiOutlineHeart } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
-import { addToCart } from '../Redux/CartReducer';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { addFavourite } from '../Redux/FavouriteReducer';
+import { addToCart } from '../Redux/CartSlice';
 import Rating from './Rating';
-import { RootState } from '../Redux/store';
 import { Product } from '../Model';
+import { ref, update } from 'firebase/database';
+import { DB } from '../config/firebase';
+import { useState } from 'react';
+import { useAppDispatch } from '../hooks/useDispatch';
+import { getProducts } from '../Redux/ProductSlice';
 
 interface props {
   product: Product;
+  index: number;
 }
 
-const ProductCard = ({ product }: props) => {
-  const { name, price, img, id } = product;
-  const dispatch = useDispatch();
-  const [isFavourite, setIsFavourite] = useState(false);
+const ProductCard = ({ product, index }: props) => {
+  const { name, price, img, isFavourite } = product;
 
-  const { favouriteItems } = useSelector(
-    (state: RootState) => state.favourites
-  );
-  const [favouriteIDs, setFavouriteIDs] = useState<string[]>([]);
-  const [fav, setFav] = useState(false);
+  const [isFave, setIsFave] = useState<boolean>(false);
 
-  useEffect(() => {
-    const handleFavourites = () => {
-      const exist = favouriteItems.map((x) => {
-        return x.id;
-      });
-      setFavouriteIDs(exist);
-    };
+  const dispatch = useAppDispatch();
 
-    handleFavourites();
-  }, [favouriteItems]);
+  const handleFavourite = async (product: Product) => {
+    console.log(product, index);
+    const Ref = ref(DB, `/Products/${index}`);
 
-  useEffect(() => {
-    const itemIndex = favouriteIDs.findIndex((x) => x === id);
-    if (itemIndex >= 0) {
-      setFav(true);
+    let newValue;
+
+    if (isFavourite === false) {
+      newValue = true;
     } else {
-      setFav(false);
+      newValue = false;
     }
-  }, [favouriteIDs, id]);
 
-  const handleFavourite = (product: Product) => {
-    setIsFavourite((prev) => !prev);
-    dispatch(addFavourite(product));
+    update(Ref, {
+      isFavourite: newValue,
+    }).then((res) => {
+      console.log(res);
+    });
+    setIsFave((prev) => !prev);
+
+    dispatch(getProducts);
   };
 
   return (
-    <section className="flex flex-col bg-white px-5 py-7 relative rounded-lg shadow  md:shadow-none flex-grow">
+    <section className="flex flex-col bg-white px-5 py-7 relative rounded-lg shadow  md:shadow-none flex-grow-0">
       <section
         onClick={() => handleFavourite(product)}
         className="text-[#c8161d] absolute right-5 text-3xl cursor-pointer"
       >
-        {isFavourite || fav ? <AiFillHeart /> : <AiOutlineHeart />}
+        {isFave || isFavourite ? <AiFillHeart /> : <AiOutlineHeart />}
       </section>
 
       <section className="w-[15rem] m-auto">

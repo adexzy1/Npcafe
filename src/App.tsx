@@ -3,8 +3,8 @@ import Home from './pages/Home';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getTotals } from './Redux/CartReducer';
+import { useSelector } from 'react-redux';
+import { getTotals } from './Redux/CartSlice';
 import Cart from './components/Cart';
 import Favourites from './pages/Favourites';
 import Wallet from './pages/Wallet';
@@ -21,13 +21,15 @@ import { setUser } from './Redux/UserSlice';
 import RequireAuth from './pages/RequireAuth';
 import { onValue, ref } from 'firebase/database';
 import { RootState } from './Redux/store';
+import { getProducts } from './Redux/ProductSlice';
+import { useAppDispatch } from './hooks/useDispatch';
 
 function App() {
   // state
   const [isLoading, setIsLoading] = useState(true);
   const [hideCartRoute, setHideCartRoute] = useState(false);
   // Redux hooks
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { cartItems } = useSelector((state: RootState) => state.cart);
 
   const width = window.screen.width;
@@ -37,6 +39,11 @@ function App() {
       setHideCartRoute(true);
     }
   }, [width]);
+
+  // get Products
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
 
   // get the number of total cart items
   useEffect(() => {
@@ -78,7 +85,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
+    <div className="app">
       {isLoading && <Loading />}
 
       {!isLoading && (

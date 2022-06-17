@@ -12,7 +12,7 @@ const PageLayout = () => {
     header: 'md:flex-[0.15]',
     outlet: 'flex-1 md:ml-[12rem] z-50',
     cartIcon:
-      'hidden md:block fixed right-10 bottom-12 shadow-xl rounded-full bg-red',
+      'hidden md:block fixed right-5 bottom-12 shadow-xl rounded-full bg-red',
     cart: `${
       showCart ? 'translate-x-0' : ' translate-x-[100vh]'
     } transform transition hidden md:fixed top-0 md:w-[25rem] shadow md:block bg-red-300 right-0`,

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { MdCancel } from 'react-icons/md';
-import { addToCart, reduceItem, removeItem } from '../Redux/CartReducer';
+import { addToCart, reduceItem, removeItem } from '../Redux/CartSlice';
 import { cartItems } from '../Model';
 
 interface Props {
