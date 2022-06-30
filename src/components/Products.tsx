@@ -3,14 +3,44 @@ import ProductCard from './ProductCard';
 import loadingIcon from '../assets/loading.svg';
 import { useSelector } from 'react-redux';
 import { RootState } from '../Redux/store';
+import { useEffect, useState } from 'react';
 
 interface props {
   products: Product[];
-  searchedText?: string;
+  searchedText: string;
+  filter: string | null;
 }
 
-const Products = ({ products, searchedText }: props) => {
+const Products = ({ products, searchedText, filter }: props) => {
+  // state
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+
+  // Redux hooks
   const { loading } = useSelector((state: RootState) => state.products);
+
+  useEffect(() => {
+    const filtered = products
+      .filter((item) => {
+        if (filter !== 'All') {
+          return item.name
+            .toLocaleLowerCase()
+            .includes(filter!.toLocaleLowerCase());
+        } else {
+          return item;
+        }
+      })
+      .filter((item) => {
+        if (searchedText !== 'All') {
+          return item.name
+            .toLocaleLowerCase()
+            .includes(searchedText.toLocaleLowerCase());
+        } else {
+          return item;
+        }
+      });
+
+    setFilteredProducts(filtered);
+  }, [searchedText, filter, products]);
 
   return (
     <div>
@@ -22,19 +52,9 @@ const Products = ({ products, searchedText }: props) => {
 
       {loading === 'fulfilled' && (
         <div className="px-5 py-10 grid gap-y-10 gap-x-3 md:grid-cols-2 xl:grid-cols-3 2xl:grid-rows-4">
-          {products
-            .filter((item) => {
-              if (searchedText !== '') {
-                return item.name
-                  .toLocaleLowerCase()
-                  .includes(searchedText!.toLocaleLowerCase());
-              } else {
-                return item;
-              }
-            })
-            .map((item, index) => (
-              <ProductCard key={item.id} product={item} index={index} />
-            ))}
+          {filteredProducts.map((item, index) => (
+            <ProductCard key={item.id} product={item} index={index} />
+          ))}
         </div>
       )}
     </div>

@@ -9,6 +9,8 @@ import { RootState } from '../Redux/store';
 const Home = () => {
   // state
   const [searchedText, setSearchedText] = useState<string>('');
+  // state
+  const [filter, setFilter] = useState<string | null>('All');
 
   // Redux Hooks
   const { products } = useSelector((state: RootState) => state.products);
@@ -31,8 +33,12 @@ const Home = () => {
       </section>
 
       <HeroCard />
-      <Category />
-      <Products products={products} searchedText={searchedText} />
+      <Category filter={filter} setFilter={setFilter} />
+      <Products
+        products={products}
+        searchedText={searchedText}
+        filter={filter}
+      />
     </div>
   );
 };
