@@ -11,19 +11,20 @@ import { getProducts } from '../Redux/ProductSlice';
 
 interface props {
   product: Product;
-  index: number;
 }
 
-const ProductCard = ({ product, index }: props) => {
+const ProductCard = ({ product }: props) => {
   const { name, price, img, isFavourite } = product;
 
+  // state
   const [isFave, setIsFave] = useState<boolean>(false);
 
+  // redux hooks
   const dispatch = useAppDispatch();
 
+  // function to add and remove favpurites from database
   const handleFavourite = async (product: Product) => {
-    console.log(product, index);
-    const Ref = ref(DB, `/Products/${index}`);
+    const Ref = ref(DB, `/Products/${product.key}`);
 
     let newValue;
 

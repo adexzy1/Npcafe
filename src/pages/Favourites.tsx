@@ -35,8 +35,8 @@ const Favourites = () => {
 
       <div className={styles.prodContainer}>
         {favouriteItems.length > 0 &&
-          favouriteItems.map((item, index) => (
-            <ProductCard key={item.id} product={item} index={index} />
+          favouriteItems.map((item) => (
+            <ProductCard key={item.id} product={item} />
           ))}
       </div>
 

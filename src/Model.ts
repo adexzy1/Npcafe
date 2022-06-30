@@ -5,6 +5,8 @@ export interface Product {
   img: string;
   isFavourite: boolean;
   rating: number[];
+  tag: string;
+  key: number;
 }
 
 export interface cartItems extends Product {

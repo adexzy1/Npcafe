@@ -7,8 +7,7 @@ interface Props {
 
 const Filter = ({ setFilter, filter }: Props) => {
   const [isActive, setIsActive] = useState(false);
-  // const [selected, setSelected] = useState<string | null>('All');
-  const options = ['All', 'Pizza', 'Hotdog', 'Tacos', 'Drink'];
+  const options = ['All', 'Pizza', 'Hotdog', 'Burger', 'Drink'];
 
   const handleSelectedOption = (e: MouseEvent<HTMLParagraphElement>) => {
     setFilter(e.currentTarget.textContent);

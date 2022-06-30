@@ -22,7 +22,7 @@ const Products = ({ products, searchedText, filter }: props) => {
     const filtered = products
       .filter((item) => {
         if (filter !== 'All') {
-          return item.name
+          return item.tag
             .toLocaleLowerCase()
             .includes(filter!.toLocaleLowerCase());
         } else {
@@ -52,8 +52,8 @@ const Products = ({ products, searchedText, filter }: props) => {
 
       {loading === 'fulfilled' && (
         <div className="px-5 py-10 grid gap-y-10 gap-x-3 md:grid-cols-2 xl:grid-cols-3 2xl:grid-rows-4">
-          {filteredProducts.map((item, index) => (
-            <ProductCard key={item.id} product={item} index={index} />
+          {filteredProducts.map((item) => (
+            <ProductCard key={item.id} product={item} />
           ))}
         </div>
       )}
