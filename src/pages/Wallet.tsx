@@ -67,13 +67,13 @@ const Wallet = () => {
             </Link>
           </div>
 
-          {transactions?.length === 0 ? (
+          {transactions === null ? (
             <>
               <img src={loadingIcon} alt="loading.." className={styles.img} />
             </>
           ) : (
             <>
-              {transactions.slice(0, 3).map((item, index) => (
+              {transactions?.slice(0, 3).map((item, index) => (
                 <TransactionsCard key={item.name} item={item} />
               ))}
             </>

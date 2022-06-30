@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import pattern from '../assets/Thur.svg';
 import { RootState } from '../Redux/store';
 
 const HeroCard = () => {
@@ -10,7 +9,7 @@ const HeroCard = () => {
   const style = {
     container:
       'm-5 max-w-[100%] bg-[#feecd4] flex rounded-lg overflow-hidden sm:h-[12rem] xl:w-[75%] xl:mx-auto',
-    heroWrapper: 'p-5 flex items-center gap-3 flex-1  m-auto',
+    heroWrapper: ` p-5 h-full flex items-center gap-3 flex-1  m-auto`,
     h3: 'font-bold text-xl',
     p: 'text-xs py-1',
     btn: 'bg-yellow px-4 py-2 text-sm mt-2 rounded-2xl text-white',
@@ -36,9 +35,9 @@ const HeroCard = () => {
         </div>
       </section>
 
-      <section className="hidden sm:block flex-1 sm:w-[80%]">
+      <section className="hidden sm:block flex-[0.7] lg:flex-1">
         <img
-          src={pattern}
+          src="https://ik.imagekit.io/oz87xfgij/AppImg/tr:h-500px/Thur_8CRfkQvA3.png"
           alt="pattern"
           className="object-cover sm:w-full sm:h-full "
         />

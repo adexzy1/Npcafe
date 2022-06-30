@@ -54,7 +54,7 @@ const Orders = () => {
         </section>
 
         <section className={styles.transactions}>
-          {transactions.length === 0 ? (
+          {transactions === null ? (
             <>
               <img src={loadingIcon} alt="loading.." className={styles.img} />
             </>
@@ -70,7 +70,7 @@ const Orders = () => {
           )}
         </section>
       </div>
-      {transactions.length > 0 && (
+      {transactions !== null && (
         <Transaction
           transactions={transactions}
           activeTransaction={activeTransaction}

@@ -1,4 +1,3 @@
-import avatar from '../assets/avatar.png';
 import { IoCameraOutline } from 'react-icons/io5';
 import { useEffect, useState, forwardRef, useRef } from 'react';
 import { useSelector } from 'react-redux';
@@ -10,16 +9,23 @@ interface Props {
 }
 
 const UploadAvatar = forwardRef<HTMLInputElement, Props>((props, ref) => {
+  // Props
   const { setValue, ...otherProps } = props;
 
-  const { user } = useSelector((state: RootState) => state.user);
-
+  // state
   const [uploader, setUploader] = useState(false);
   const [image, setImage] = useState<Blob | null>(null);
   const [filePreview, setFilePreview] = useState<any>();
 
+  // Redux Hooks
+  const { user } = useSelector((state: RootState) => state.user);
+
+  // placeholder iamge
+  const avatarPlaceHolder =
+    'https://ik.imagekit.io/oz87xfgij/AppImg/Male-placeholder_ZMbO2jQp1.jpeg';
+
   // set user avatar
-  const photoUrl = user?.photoURL ? user.photoURL : avatar;
+  const photoUrl = user?.photoURL ? user.photoURL : avatarPlaceHolder;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -87,9 +93,7 @@ const UploadAvatar = forwardRef<HTMLInputElement, Props>((props, ref) => {
       />
 
       <img
-        src={
-          filePreview ? filePreview : user?.photoURL ? user.photoURL : avatar
-        }
+        src={filePreview ? filePreview : photoUrl}
         alt="user avatar"
         className={style.img}
       />
