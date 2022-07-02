@@ -14,6 +14,7 @@ const settingsSchema = yup
     phone: yup
       .number()
       .required('Phone Number is required')
+      .min(11, 'Enter a valid Phone Number')
       .typeError('Enter a valid Phone Number'),
 
     address: yup.string().required('Address is required'),

@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Product } from '../Model';
+import axios from 'axios';
 
 // fetch products with async thunk
 const getProducts = createAsyncThunk('products/getProducts', async () => {
-  const res = await fetch(
+  const response = await axios.get(
     'https://pizza-store-da4a5-default-rtdb.firebaseio.com/Products.json'
   );
-  return (await res.json()) as Product[];
+  return (await response.data) as Product[];
 });
 
 // typescript interface
@@ -28,7 +29,14 @@ const productSlice = createSlice({
   initialState,
 
   reducers: {
-    filterProducts: (state, action) => {},
+    addFavoutite: (state, action) => {
+      // find the item in the array
+      const item = state.products.find((x) => x.id === action.payload);
+      // mutate the isFavourite property of the item
+      item!.isFavourite = !item?.isFavourite;
+      // update the glabal state
+      state.products = [...state.products];
+    },
   },
 
   extraReducers: (builder) => {
@@ -68,5 +76,7 @@ const productSlice = createSlice({
 });
 
 export { getProducts };
+
+export const { addFavoutite } = productSlice.actions;
 
 export default productSlice.reducer;

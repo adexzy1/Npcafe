@@ -21,8 +21,8 @@ import { setUser } from './Redux/UserSlice';
 import RequireAuth from './pages/RequireAuth';
 import { onValue, ref } from 'firebase/database';
 import { RootState } from './Redux/store';
-import { getProducts } from './Redux/ProductSlice';
 import { useAppDispatch } from './hooks/useDispatch';
+import { getProducts } from './Redux/ProductSlice';
 
 function App() {
   // state
@@ -64,10 +64,10 @@ function App() {
 
           dispatch(
             setUser({
+              displayName: displayName!,
+              email: email!,
               uid: uid,
-              displayName: displayName,
-              email: email,
-              photoURL: photoURL,
+              photoURL: photoURL!,
               phone: data.phone,
               address: data.address,
             })

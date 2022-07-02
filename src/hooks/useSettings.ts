@@ -54,12 +54,13 @@ const useSettings = () => {
       });
 
       // set golbal state to currentuser details
+
       dispatch(
         setUser({
-          displayName: auth.currentUser!.displayName,
-          email: auth.currentUser!.email,
+          displayName: auth.currentUser!.displayName!,
+          email: auth.currentUser!.email!,
           uid: auth.currentUser!.uid,
-          photoURL: auth.currentUser!.photoURL,
+          photoURL: auth.currentUser!.photoURL!,
           phone: phone,
           address: address,
         })

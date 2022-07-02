@@ -18,7 +18,7 @@ export interface user {
   displayName: string;
   email: string;
   photoURL: string;
-  phone: number;
+  phone: number | string;
   address: string;
 }
 

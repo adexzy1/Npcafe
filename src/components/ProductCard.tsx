@@ -7,67 +7,69 @@ import { ref, update } from 'firebase/database';
 import { DB } from '../config/firebase';
 import { useState } from 'react';
 import { useAppDispatch } from '../hooks/useDispatch';
-import { getProducts } from '../Redux/ProductSlice';
+import { addFavoutite } from '../Redux/ProductSlice';
 
 interface props {
   product: Product;
 }
 
 const ProductCard = ({ product }: props) => {
-  const { name, price, img, isFavourite } = product;
-
+  const { name, price, img, isFavourite, key, id } = product;
   // state
   const [isFave, setIsFave] = useState<boolean>(false);
-
   // redux hooks
   const dispatch = useAppDispatch();
-
   // function to add and remove favpurites from database
-  const handleFavourite = async (product: Product) => {
-    const Ref = ref(DB, `/Products/${product.key}`);
-
-    let newValue;
-
-    if (isFavourite === false) {
-      newValue = true;
-    } else {
-      newValue = false;
-    }
-
-    update(Ref, {
-      isFavourite: newValue,
-    }).then((res) => {
-      console.log(res);
+  const handleFavourite = async () => {
+    const Ref = ref(DB, `/Products/${key}`);
+    // update the database
+    await update(Ref, {
+      isFavourite: !isFavourite,
     });
+    // update the product object in the global state
+    dispatch(addFavoutite(id));
+    // updste the local state
     setIsFave((prev) => !prev);
+  };
 
-    dispatch(getProducts);
+  const style = {
+    wrapper:
+      'flex flex-col bg-white px-5 py-7 relative rounded-lg shadow  md:shadow-none flex-grow-0',
+    addFav: 'text-[#c8161d] absolute right-5 text-3xl cursor-pointer',
+    imgWrapper: 'w-[15rem] m-auto',
+    img: 'w-full',
+    detailsWrapper: 'flex items-end justify-between pt-3',
+    name: 'font-bold text-xl pb-2',
+    price: 'font-semibold pt-1',
+    currencySign: 'text-xs',
+    addToCartBtn:
+      'bg-yellow text-center h-12 w-12 flex justify-center items-center text-white rounded-full text-2xl hover:cursor-pointer hover:shadow',
   };
 
   return (
-    <section className="flex flex-col bg-white px-5 py-7 relative rounded-lg shadow  md:shadow-none flex-grow-0">
-      <section
-        onClick={() => handleFavourite(product)}
-        className="text-[#c8161d] absolute right-5 text-3xl cursor-pointer"
-      >
+    <section className={style.wrapper}>
+      <section onClick={() => handleFavourite()} className={style.addFav}>
         {isFave || isFavourite ? <AiFillHeart /> : <AiOutlineHeart />}
       </section>
 
-      <section className="w-[15rem] m-auto">
-        <img src={img} alt={name} className="w-full" />
+      <section className={style.imgWrapper}>
+        <img src={img} alt={name} className={style.img} />
       </section>
-      <section className="flex items-end justify-between pt-3 ">
+
+      <section className={style.detailsWrapper}>
         <div>
-          <h2 className="font-bold text-xl pb-2">{name}</h2>
+          <h2 className={style.name}>{name}</h2>
+
           <Rating />
-          <p className="font-semibold pt-1">
-            <span className="text-xs">₦</span>
+
+          <p className={style.price}>
+            <span className={style.currencySign}>₦</span>
             {price}
           </p>
         </div>
         <span
           onClick={() => dispatch(addToCart(product))}
-          className="bg-yellow text-center h-12 w-12 flex justify-center items-center text-white rounded-full text-2xl hover:cursor-pointer hover:shadow"
+          className={style.addToCartBtn}
         >
           +
         </span>

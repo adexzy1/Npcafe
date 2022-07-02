@@ -27,10 +27,12 @@ const useSignup = () => {
 
       dispatch(
         setUser({
-          displayName: auth.currentUser!.displayName,
-          email: auth.currentUser!.email,
+          displayName: auth.currentUser!.displayName!,
+          email: auth.currentUser!.email!,
           uid: auth.currentUser!.uid,
-          photoURL: auth.currentUser!.photoURL,
+          photoURL: auth.currentUser!.photoURL!,
+          phone: '',
+          address: '',
         })
       );
 

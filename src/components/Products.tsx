@@ -4,6 +4,8 @@ import loadingIcon from '../assets/loading.svg';
 import { useSelector } from 'react-redux';
 import { RootState } from '../Redux/store';
 import { useEffect, useState } from 'react';
+import { getProducts } from '../Redux/ProductSlice';
+import { useAppDispatch } from '../hooks/useDispatch';
 
 interface props {
   products: Product[];
@@ -17,7 +19,9 @@ const Products = ({ products, searchedText, filter }: props) => {
 
   // Redux hooks
   const { loading } = useSelector((state: RootState) => state.products);
+  const dispatch = useAppDispatch();
 
+  // filter all and search products
   useEffect(() => {
     const filtered = products
       .filter((item) => {
