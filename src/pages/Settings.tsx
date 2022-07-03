@@ -1,10 +1,9 @@
-import UploadAvatar from '../components/UploadAvatar';
-import Input from '../components/Input';
-import TopBar from '../components/TopBar';
-import useValidation from '../hooks/UseValidation';
+import UploadAvatar from '../components/uploadAvater/UploadAvatar';
+import Input from '../components/input/Input';
+import TopBar from '../components/topbar/TopBar';
 import { useSelector } from 'react-redux';
 import settingsSchema from '../Schema/settingsSchema';
-import Reauthenticate from '../components/Reauthenticate';
+import ConfirmPassWord from '../components/confirmPassword/confirmPassWord';
 import { useState } from 'react';
 import useSettings from '../hooks/useSettings';
 import { toast } from 'react-toastify';
@@ -12,6 +11,8 @@ import useHandleError from '../hooks/useHandleError';
 import { RootState } from '../Redux/store';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
 import { error } from '../Model';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const Settings = () => {
   // state
@@ -21,21 +22,36 @@ const Settings = () => {
   // Redux Hooks
   const { user } = useSelector((state: RootState) => state.user);
 
-  // custom Hooks
-  const { handleSubmit, register, errors, watch, setValue } =
-    useValidation(settingsSchema);
+  // Custom hooks
   const { settings } = useSettings();
   const [handleError] = useHandleError();
 
-  // React-hook-froms watch method to track input changes
-  const fullName = watch('fullName', user?.displayName ? user.displayName : '');
-  const email = watch('email', user?.email ? user.email : '');
-  const phone = watch('phone', user?.phone ? user.phone : '');
-  const address = watch('address', user?.address ? user.address : '');
+  // input field default values
+  const defaultValues: FieldValues = {
+    fullName: user?.displayName,
+    email: user?.email,
+    phone: user?.phone,
+    address: user?.address,
+    password: '',
+    photoUrl: user?.photoURL,
+  };
 
+  // React hook forms
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(settingsSchema),
+    mode: 'onBlur',
+    defaultValues,
+  });
+
+  // the form submit function
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    setIsLoading(true);
-
+    // setIsLoading(true);
+    console.log(data);
     // save settings in database
     const response = await settings(data);
 
@@ -52,6 +68,7 @@ const Settings = () => {
     }
   };
 
+  // show comfirm passwprd modal
   const handleModal = () => {
     setShowModal(true);
     document.body.style.overflowY = 'hidden';
@@ -87,15 +104,14 @@ const Settings = () => {
               type={'text'}
               label={'Full Name'}
               {...register('fullName')}
-              value={fullName}
               error={errors.fullName}
             />
+
             <Input
               type={'email'}
               label={'Email'}
               {...register('email')}
               error={errors.email}
-              value={email}
             />
           </div>
 
@@ -104,13 +120,12 @@ const Settings = () => {
               type={'tel'}
               label={'Phone'}
               {...register('phone')}
-              value={phone}
               error={errors.phone}
             />
+
             <Input
               type={'text'}
               label={'Address'}
-              value={address}
               {...register('address')}
               error={errors.address}
             />
@@ -125,9 +140,8 @@ const Settings = () => {
           </button>
         </section>
 
-        {/* Reauthentication Modal component*/}
         {showModal && (
-          <Reauthenticate
+          <ConfirmPassWord
             setShowModal={setShowModal}
             isLoading={isLoading}
             setIsLoading={setIsLoading}

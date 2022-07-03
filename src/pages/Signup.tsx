@@ -1,4 +1,4 @@
-import Input from '../components/Input';
+import Input from '../components/input/Input';
 import { Link } from 'react-router-dom';
 import { AiFillEyeInvisible } from 'react-icons/ai';
 import { AiFillEye } from 'react-icons/ai';

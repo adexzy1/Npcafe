@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../Redux/store';
+import { RootState } from '../../Redux/store';
 
 const HeroCard = () => {
   const { user } = useSelector((state: RootState) => state.user);
 
+  // user display name
   let username = user ? user.displayName.split(' ')[0] : '';
 
   const style = {

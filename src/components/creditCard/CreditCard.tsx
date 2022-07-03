@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../Redux/store';
+import { RootState } from '../../Redux/store';
 
 const CreditCard = () => {
   const [addCard, setAddCard] = useState(false);

@@ -1,7 +1,6 @@
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AnyObjectSchema } from 'yup';
-// import { loginData, settings } from '../Model';
 
 const useValidation = (schema: AnyObjectSchema) => {
   const {
@@ -10,12 +9,20 @@ const useValidation = (schema: AnyObjectSchema) => {
     formState: { errors },
     watch,
     setValue,
+    control,
   } = useForm<FieldValues>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   });
 
-  return { handleSubmit, register, errors, watch, setValue };
+  return {
+    handleSubmit,
+    register,
+    errors,
+    watch,
+    setValue,
+    control,
+  };
 };
 
 export default useValidation;

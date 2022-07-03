@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import Header from '../components/Header';
-import Cart from '../components/Cart';
+import Header from '../components/header/Header';
+import Cart from '../components/cart/Cart';
 import { useState } from 'react';
-import CartIcon from '../components/CartIcon';
+import CartIcon from '../components/cart/CartIcon';
 
 const PageLayout = () => {
   const [showCart, setShowCart] = useState(false);

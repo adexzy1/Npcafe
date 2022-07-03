@@ -1,4 +1,4 @@
-import { transaction } from '../Model';
+import { transaction } from '../../Model';
 interface Props {
   orderItem?: boolean;
   item: transaction;

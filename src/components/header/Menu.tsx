@@ -7,11 +7,11 @@ import { IoMdLogOut } from 'react-icons/io';
 import { RiUserReceived2Line } from 'react-icons/ri';
 import NavLinks from './NavLinks';
 import { useSelector, useDispatch } from 'react-redux';
-import { auth } from '../config/firebase';
+import { auth } from '../../config/firebase';
 import { toast } from 'react-toastify';
-import { logOut } from '../Redux/UserSlice';
+import { logOut } from '../../Redux/UserSlice';
 import { Link, useNavigate } from 'react-router-dom';
-import { RootState } from '../Redux/store';
+import { RootState } from '../../Redux/store';
 
 interface Props {
   toggle: boolean;
@@ -26,6 +26,7 @@ const Menu = ({ toggle, setToggle }: Props) => {
   // react router dom hooks
   const navigate = useNavigate();
 
+  // logout function
   const handleLogOut = async () => {
     setToggle(false);
 
@@ -46,7 +47,7 @@ const Menu = ({ toggle, setToggle }: Props) => {
     logo: 'text-5xl font-bold',
     logoSub: 'text-2xl text-yellow',
     btnWrapper: 'md:mt-[10rem]',
-    btn: 'flex w-full items-center py-3 mb-2 gap-2 hover:px-2 hover:text-white rounded-lg px-2 hover:bg-yellowDark text-sm',
+    btn: 'flex w-full items-center py-3 mb-2 gap-2 hover:px-2 hover:text-white rounded-lg px-2 hover:bg-yellow text-sm',
   };
 
   return (

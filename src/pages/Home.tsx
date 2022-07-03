@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Category from '../components/Category';
-import HeroCard from '../components/HeroCard';
-import Products from '../components/Products';
-import SearchBar from '../components/SearchBar';
+import Category from '../components/category/Category';
+import HeroCard from '../components/herocard/HeroCard';
+import Products from '../components/products/Products';
+import SearchBar from '../components/search/SearchBar';
 import { RootState } from '../Redux/store';
 
 const Home = () => {
@@ -33,7 +33,9 @@ const Home = () => {
       </section>
 
       <HeroCard />
+
       <Category filter={filter} setFilter={setFilter} />
+
       <Products
         products={products}
         searchedText={searchedText}

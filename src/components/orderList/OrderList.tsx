@@ -1,5 +1,5 @@
-import { transaction } from '../Model';
-import TransactionsCard from './TransactionsCard';
+import { transaction } from '../../Model';
+import TransactionsCard from '../transactions/TransactionsCard';
 
 interface Props {
   transactions: transaction[];

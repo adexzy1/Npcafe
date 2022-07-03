@@ -3,7 +3,7 @@ import { BiUserCircle } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Menu from './Menu';
-import CartIcon from './CartIcon';
+import CartIcon from '../cart/CartIcon';
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);

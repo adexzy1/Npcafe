@@ -1,4 +1,4 @@
-import loadingIcon from '../assets/loading.svg';
+import loadingIcon from '../../assets/loading.svg';
 
 const Loading = () => {
   const style = {

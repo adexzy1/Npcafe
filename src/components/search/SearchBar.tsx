@@ -1,7 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { IoCloseOutline } from 'react-icons/io5';
-import { Product } from '../Model';
+import { Product } from '../../Model';
+import SuggestionCard from './SuggestionCard';
 
 interface props {
   items: Product[];
@@ -14,6 +15,7 @@ const SearchBar = ({ items, searchedText, setSearchedText }: props) => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [suggestion, setsuggestion] = useState<Product[]>([]);
 
+  // handle input value change
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchedText(value);
@@ -30,13 +32,14 @@ const SearchBar = ({ items, searchedText, setSearchedText }: props) => {
     }
   };
 
-  const handleSuggestion = (text: string) => {
-    setSearchedText(text);
-    setIsActive(false);
-  };
-
   const clearInput = () => {
     setSearchedText('');
+  };
+
+  const HandleBlur = () => {
+    setTimeout(() => {
+      setIsActive(false);
+    }, 100);
   };
 
   return (
@@ -46,11 +49,7 @@ const SearchBar = ({ items, searchedText, setSearchedText }: props) => {
         placeholder="Search by food name"
         className="bg-transparent flex-1 ml-1 text-sm outline-none"
         value={searchedText}
-        onBlur={() => {
-          setTimeout(() => {
-            setIsActive(false);
-          }, 100);
-        }}
+        onBlur={HandleBlur}
       />
 
       <div className="text-xl cursor-pointer">
@@ -62,27 +61,11 @@ const SearchBar = ({ items, searchedText, setSearchedText }: props) => {
       </div>
 
       {isActive && (
-        <section className=" text-black overflow-hidden py-2 overflow-y-scroll absolute bg-white  h-56 w-full shadow rounded-lg top-14">
-          {suggestion.length > 0 && (
-            <>
-              {suggestion.map((item, index) => (
-                <p
-                  onClick={() => handleSuggestion(item.name)}
-                  className="hover:bg-grey py-3 px-5 text-sm cursor-pointer"
-                  key={index}
-                >
-                  {item.name}
-                </p>
-              ))}
-            </>
-          )}
-
-          {suggestion.length === 0 && (
-            <div className=" flex h-full w-full text-gray-400 justify-center items-center text-sm">
-              Item Not Available
-            </div>
-          )}
-        </section>
+        <SuggestionCard
+          suggestion={suggestion}
+          setSearchedText={setSearchedText}
+          setIsActive={setIsActive}
+        />
       )}
     </section>
   );

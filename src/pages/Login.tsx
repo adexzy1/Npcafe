@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Input from '../components/Input';
+import Input from '../components/input/Input';
 import { AiFillEyeInvisible } from 'react-icons/ai';
 import { AiFillEye } from 'react-icons/ai';
 import useValidation from '../hooks/UseValidation';

@@ -2,7 +2,7 @@ import React from 'react';
 import TransactionsCard from './TransactionsCard';
 import { useEffect, useState } from 'react';
 import { HiOutlineArrowNarrowLeft } from 'react-icons/hi';
-import { details, transaction } from '../Model';
+import { details, transaction } from '../../Model';
 
 interface props {
   transactions: transaction[];

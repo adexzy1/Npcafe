@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { IoBasketOutline } from 'react-icons/io5';
-import { RootState } from '../Redux/store';
+import { RootState } from '../../Redux/store';
 
 interface Props {
   setShowCart?: React.Dispatch<React.SetStateAction<boolean>>;

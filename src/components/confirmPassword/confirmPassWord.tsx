@@ -1,8 +1,8 @@
-import Input from './Input';
+import Input from '../input/Input';
 import { AiFillEyeInvisible } from 'react-icons/ai';
 import { AiFillEye } from 'react-icons/ai';
 import { useState, forwardRef } from 'react';
-import loadingIcon from '../assets/loading.svg';
+import loadingIcon from '../../assets/loading.svg';
 import { MdOutlineCancel } from 'react-icons/md';
 import { FieldError } from 'react-hook-form';
 

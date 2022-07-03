@@ -1,11 +1,11 @@
 import React from 'react';
-import CreditCard from '../components/CreditCard';
+import CreditCard from '../components/creditCard/CreditCard';
 import loadingIcon from '../assets/loading.svg';
-import TopBar from '../components/TopBar';
+import TopBar from '../components/topbar/TopBar';
 import { DB, auth } from '../config/firebase';
 import { ref, onValue } from 'firebase/database';
 import { useEffect, useState } from 'react';
-import TransactionsCard from '../components/TransactionsCard';
+import TransactionsCard from '../components/transactions/TransactionsCard';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../Redux/store';

@@ -2,7 +2,7 @@ import { IoCameraOutline } from 'react-icons/io5';
 import { useEffect, useState, forwardRef, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { FieldValues, UseFormSetValue } from 'react-hook-form';
-import { RootState } from '../Redux/store';
+import { RootState } from '../../Redux/store';
 
 interface Props {
   setValue: UseFormSetValue<FieldValues>;

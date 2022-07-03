@@ -2,15 +2,16 @@ import CartCard from './CartCard';
 import { IoBasketOutline } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 import { AiOutlineRollback } from 'react-icons/ai';
-import { RootState } from '../Redux/store';
+import { RootState } from '../../Redux/store';
 import { useNavigate } from 'react-router-dom';
-import { cartItems } from '../Model';
+import { cartItems } from '../../Model';
 
 interface props {
   setShowCart?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Cart = ({ setShowCart }: props) => {
+  // Redux hooks
   const { cartItems, totalPrice } = useSelector(
     (state: RootState) => state.cart
   );
@@ -18,6 +19,7 @@ const Cart = ({ setShowCart }: props) => {
   const navigate = useNavigate();
   // const dispatch = useDispatch();
 
+  // cart back button navigate to home screen on small devices
   const handleNavigate = () => {
     const width = window.screen.width;
     if (width >= 768) {

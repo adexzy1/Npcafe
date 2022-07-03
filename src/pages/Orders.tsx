@@ -1,12 +1,12 @@
-import SearchBar from '../components/SearchBar';
-import TopBar from '../components/TopBar';
+import SearchBar from '../components/search/SearchBar';
+import TopBar from '../components/topbar/TopBar';
 import loadingIcon from '../assets/loading.svg';
 import { DB } from '../config/firebase';
 import { onValue, ref } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import OrderCollection from '../components/OrderCollection';
-import Transaction from '../components/transaction';
+import OrderCollection from '../components/orderList/OrderList';
+import Transaction from '../components/transactions/transaction';
 import { RootState } from '../Redux/store';
 
 const Orders = () => {
@@ -59,14 +59,12 @@ const Orders = () => {
               <img src={loadingIcon} alt="loading.." className={styles.img} />
             </>
           ) : (
-            <>
-              <OrderCollection
-                transactions={transactions}
-                setActiveTransaction={setActiveTransaction}
-                setShowModal={setShowModal}
-                searchedText={searchedText}
-              />
-            </>
+            <OrderCollection
+              transactions={transactions}
+              setActiveTransaction={setActiveTransaction}
+              setShowModal={setShowModal}
+              searchedText={searchedText}
+            />
           )}
         </section>
       </div>

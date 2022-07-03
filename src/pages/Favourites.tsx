@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import TopBar from '../components/TopBar';
+import TopBar from '../components/topbar/TopBar';
 import { RootState } from '../Redux/store';
 import { useEffect, useState } from 'react';
 import { Product } from '../Model';
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../components/products/ProductCard';
 
 const Favourites = () => {
   // State

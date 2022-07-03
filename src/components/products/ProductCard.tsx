@@ -1,13 +1,13 @@
 import { AiOutlineHeart } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
-import { addToCart } from '../Redux/CartSlice';
+import { addToCart } from '../../Redux/CartSlice';
 import Rating from './Rating';
-import { Product } from '../Model';
+import { Product } from '../../Model';
 import { ref, update } from 'firebase/database';
-import { DB } from '../config/firebase';
+import { DB } from '../../config/firebase';
 import { useState } from 'react';
-import { useAppDispatch } from '../hooks/useDispatch';
-import { addFavoutite } from '../Redux/ProductSlice';
+import { useAppDispatch } from '../../hooks/useDispatch';
+import { addFavoutite } from '../../Redux/ProductSlice';
 
 interface props {
   product: Product;
