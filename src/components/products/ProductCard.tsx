@@ -8,6 +8,7 @@ import { DB } from '../../config/firebase';
 import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/useDispatch';
 import { addFavoutite } from '../../Redux/ProductSlice';
+import { toast } from 'react-toastify';
 
 interface props {
   product: Product;
@@ -28,8 +29,14 @@ const ProductCard = ({ product }: props) => {
     });
     // update the product object in the global state
     dispatch(addFavoutite(id));
-    // updste the local state
+    // update the local state
     setIsFave((prev) => !prev);
+    // alert the confirmation
+    if (isFavourite === false) {
+      toast.success(`${name} added to favourites`);
+    } else {
+      toast.success(`${name} removed from favourites`);
+    }
   };
 
   const style = {
