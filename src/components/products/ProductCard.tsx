@@ -5,10 +5,11 @@ import Rating from './Rating';
 import { Product } from '../../Model';
 import { ref, update } from 'firebase/database';
 import { DB } from '../../config/firebase';
-import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/useDispatch';
 import { addFavoutite } from '../../Redux/ProductSlice';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../Redux/store';
 
 interface props {
   product: Product;
@@ -16,27 +17,36 @@ interface props {
 
 const ProductCard = ({ product }: props) => {
   const { name, price, img, isFavourite, key, id } = product;
-  // state
-  const [isFave, setIsFave] = useState<boolean>(false);
+
   // redux hooks
   const dispatch = useAppDispatch();
+  const { user } = useSelector((state: RootState) => state.user);
+
   // function to add and remove favpurites from database
   const handleFavourite = async () => {
     const Ref = ref(DB, `/Products/${key}`);
-    // update the database
-    await update(Ref, {
-      isFavourite: !isFavourite,
-    });
-    // update the product object in the global state
-    dispatch(addFavoutite(id));
-    // update the local state
-    setIsFave((prev) => !prev);
-    // alert the confirmation
-    if (isFavourite === false) {
-      toast.success(`${name} added to favourites`);
-    } else {
-      toast.success(`${name} removed from favourites`);
+
+    // check if user is logged In
+    if (user) {
+      // update the database
+      await update(Ref, {
+        isFavourite: !isFavourite,
+      });
+
+      // update the product object in the global state
+      dispatch(addFavoutite(id));
+
+      // alert the confirmation
+      if (isFavourite === false) {
+        toast.success(`${name} added to favourites`);
+      } else {
+        toast.success(`${name} removed from favourites`);
+      }
+      return;
     }
+
+    // show error message if user is not logged in
+    toast.error('You must be logged in');
   };
 
   const style = {
@@ -56,7 +66,7 @@ const ProductCard = ({ product }: props) => {
   return (
     <section className={style.wrapper}>
       <section onClick={() => handleFavourite()} className={style.addFav}>
-        {isFave || isFavourite ? <AiFillHeart /> : <AiOutlineHeart />}
+        {isFavourite ? <AiFillHeart /> : <AiOutlineHeart />}
       </section>
 
       <section className={style.imgWrapper}>
