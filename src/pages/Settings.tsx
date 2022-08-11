@@ -11,8 +11,7 @@ import useHandleError from '../hooks/useHandleError';
 import { RootState } from '../Redux/store';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
 import { error } from '../Model';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import useValidation from '../hooks/UseValidation';
 
 const Settings = () => {
   // state
@@ -36,22 +35,17 @@ const Settings = () => {
     photoUrl: user?.photoURL,
   };
 
-  // React hook forms
-  const {
-    handleSubmit,
-    register,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(settingsSchema),
-    mode: 'onBlur',
-    defaultValues,
-  });
+  // form validation custom hook
+  const { handleSubmit, register, setValue, errors } = useValidation(
+    settingsSchema,
+    defaultValues
+  );
 
   // the form submit function
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // setIsLoading(true);
-    console.log(data);
+    // set loadin to true
+    setIsLoading(true);
+
     // save settings in database
     const response = await settings(data);
 
@@ -63,6 +57,7 @@ const Settings = () => {
     } else {
       // set loading to false
       setIsLoading(false);
+      // handle error function
       const errorResponse = await handleError(response as error);
       toast.error(errorResponse);
     }
@@ -70,12 +65,17 @@ const Settings = () => {
 
   // show comfirm passwprd modal
   const handleModal = () => {
-    setShowModal(true);
-    document.body.style.overflowY = 'hidden';
+    if (errors.phone || errors.fullName || errors.email || errors.address) {
+      setShowModal(false);
+      toast.error('All fields are required');
+    } else {
+      setShowModal(true);
+      document.body.style.overflowY = 'hidden';
+    }
   };
 
   const styles = {
-    wrapper: 'min-h-screen pt-5 md:pt-8 pb-28 md:pb-10 relative',
+    wrapper: 'min-h-screen pt-5 md:pt-8 pb-28 md:pb-10',
     inputContainer:
       'md:p-10 md:rounded-xl lg:w-[70%] md:bg-white md:mx-auto md:mt-10',
     topbar: 'px-5',
@@ -88,57 +88,59 @@ const Settings = () => {
 
   return (
     <section className={styles.wrapper}>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.topbar}>
           <TopBar text={'Settings'} link={'/'} />
         </div>
 
-        <section className={styles.inputContainer}>
-          <section>
-            <UploadAvatar {...register('photoUrl')} setValue={setValue} />
-            <p className={styles.uploadAvatarText}>Upload Avatar</p>
+        <div className={styles.form}>
+          <section className={styles.inputContainer}>
+            <section>
+              <UploadAvatar {...register('photoUrl')} setValue={setValue} />
+              <p className={styles.uploadAvatarText}>Upload Avatar</p>
+            </section>
+
+            <div className={styles.formGroup}>
+              <Input
+                type={'text'}
+                label={'Full Name'}
+                {...register('fullName')}
+                error={errors.fullName}
+              />
+
+              <Input
+                type={'email'}
+                label={'Email'}
+                {...register('email')}
+                error={errors.email}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <Input
+                type={'tel'}
+                label={'Phone'}
+                {...register('phone')}
+                error={errors.phone}
+              />
+
+              <Input
+                type={'text'}
+                label={'Address'}
+                {...register('address')}
+                error={errors.address}
+              />
+            </div>
+
+            <button
+              onClick={handleModal}
+              type="button"
+              className={styles.saveChanges}
+            >
+              Save Changes
+            </button>
           </section>
-
-          <div className={styles.formGroup}>
-            <Input
-              type={'text'}
-              label={'Full Name'}
-              {...register('fullName')}
-              error={errors.fullName}
-            />
-
-            <Input
-              type={'email'}
-              label={'Email'}
-              {...register('email')}
-              error={errors.email}
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <Input
-              type={'tel'}
-              label={'Phone'}
-              {...register('phone')}
-              error={errors.phone}
-            />
-
-            <Input
-              type={'text'}
-              label={'Address'}
-              {...register('address')}
-              error={errors.address}
-            />
-          </div>
-
-          <button
-            onClick={handleModal}
-            type="button"
-            className={styles.saveChanges}
-          >
-            Save Changes
-          </button>
-        </section>
+        </div>
 
         {showModal && (
           <ConfirmPassWord

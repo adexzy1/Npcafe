@@ -23,7 +23,7 @@ const useAuthStateChanged = () => {
         onValue(dbRef, (snapshot) => {
           const data = snapshot.val();
 
-          dispatch(
+          const response = dispatch(
             setUser({
               displayName: displayName!,
               email: email!,
@@ -33,11 +33,14 @@ const useAuthStateChanged = () => {
               address: data.address,
             })
           );
-        });
 
-        // stop loading state
-        setIsLoading(false);
+          // stop loading state if user is not empty
+          if (response.payload !== null) {
+            setIsLoading(false);
+          }
+        });
       } else {
+        // set user to null if no current user
         dispatch(setUser(null));
         // stop loading state
         setIsLoading(false);

@@ -24,7 +24,7 @@ const Reauthenticate = forwardRef<HTMLInputElement, Props>((props, ref) => {
   };
 
   const styles = {
-    wrapper: 'absolute bg-rgba h-full w-full top-0 md:pt-0 flex z-30',
+    wrapper: 'absolute bg-rgba h-full w-full top-0 md:pt-0 flex z-30 left-0',
     container: 'bg-white p-5 rounded-lg w-[22rem] md:w-[25rem] relative m-auto',
     cancelBtn: 'absolute right-5 text-2xl text-yellow',
     enterPass: 'text-xl font-semibold text-center pt-10',
