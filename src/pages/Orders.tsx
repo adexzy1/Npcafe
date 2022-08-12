@@ -5,15 +5,12 @@ import { DB } from '../config/firebase';
 import { onValue, ref } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import OrderCollection from '../components/orderList/OrderList';
-import Transaction from '../components/transactions/transaction';
 import { RootState } from '../Redux/store';
+import OrderList from '../components/orderList/OrderList';
 
 const Orders = () => {
   // state
   const [transactions, setTransactions] = useState([]);
-  const [activeTransaction, setActiveTransaction] = useState('Order#1');
-  const [showModal, setShowModal] = useState(false);
   const [searchedText, setSearchedText] = useState<string>('');
 
   // Redux Hooks
@@ -35,8 +32,7 @@ const Orders = () => {
   const styles = {
     wrapper: 'pt-5 md:pt-8 pb-28 md:pb-10 px-5 min-h-screen',
     topContainer: 'md:flex items-center justify-between',
-    transactions:
-      'mt-10 lg:w-[23rem] xl:w-[32rem] md:rounded-xl min-h-[35rem] md:mt-20',
+    transactions: 'mt-10 lg:w-[65%] md:mt-20 lg:mx-auto',
     img: 'w-16 m-auto',
   };
 
@@ -59,23 +55,13 @@ const Orders = () => {
               <img src={loadingIcon} alt="loading.." className={styles.img} />
             </>
           ) : (
-            <OrderCollection
+            <OrderList
               transactions={transactions}
-              setActiveTransaction={setActiveTransaction}
-              setShowModal={setShowModal}
               searchedText={searchedText}
             />
           )}
         </section>
       </div>
-      {transactions !== null && (
-        <Transaction
-          transactions={transactions}
-          activeTransaction={activeTransaction}
-          setShowModal={setShowModal}
-          showModal={showModal}
-        />
-      )}
     </section>
   );
 };

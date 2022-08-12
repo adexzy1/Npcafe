@@ -4,13 +4,9 @@ import TransactionsCard from '../transactions/TransactionsCard';
 interface Props {
   transactions: transaction[];
   searchedText: string;
-  setActiveTransaction?: React.Dispatch<React.SetStateAction<string>>;
-  setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const OrderCollection = ({ searchedText, ...props }: Props) => {
-  const { transactions, setActiveTransaction, setShowModal } = props;
-
+const OrderList = ({ searchedText, transactions }: Props) => {
   return (
     <div>
       {transactions
@@ -24,15 +20,10 @@ const OrderCollection = ({ searchedText, ...props }: Props) => {
           }
         })
         .map((item: transaction) => (
-          <TransactionsCard
-            key={item.name}
-            item={item}
-            setActiveTransaction={setActiveTransaction}
-            setShowModal={setShowModal}
-          />
+          <TransactionsCard key={item.name} item={item} />
         ))}
     </div>
   );
 };
 
-export default OrderCollection;
+export default OrderList;

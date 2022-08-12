@@ -1,26 +1,27 @@
+import { useState } from 'react';
 import { transaction } from '../../Model';
+import Transaction from './Transaction';
 interface Props {
   orderItem?: boolean;
   item: transaction;
-  setActiveTransaction?: React.Dispatch<React.SetStateAction<string>>;
-  setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TransactionsCard = ({ ...props }: Props) => {
-  const { orderItem, item, setActiveTransaction, setShowModal } = props;
+const TransactionsCard = ({ orderItem, item }: Props) => {
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleClick = () => {
     if (!orderItem) {
-      setActiveTransaction!(item.name);
-      setShowModal!(true);
-    } else {
+      setShowModal(true);
+      document.body.style.overflowY = 'hidden';
     }
   };
+
+  console.log(showModal);
 
   const styles = {
     wrapper: `${
       !orderItem && 'cursor-pointer'
-    } h-20 flex bg-grey md:bg-white  items-center justify-between py-2 px-3 rounded-lg mb-3 md:mb-5`,
+    } h-20 flex bg-grey md:bg-white  items-center justify-between py-2 px-5 rounded-lg mb-3 md:mb-5`,
     date: 'text-gray-400 text-xs',
     p: 'font-semibold',
     orderItem: 'flex items-center',
@@ -50,10 +51,16 @@ const TransactionsCard = ({ ...props }: Props) => {
 
       {/* render this for the order component */}
       {!orderItem && (
-        <section className="">
-          <p className={styles.name}>{item.name}</p>
-          <span className={styles.status}>{item.status}</span>
-        </section>
+        <>
+          <section className="">
+            <p className={styles.name}>{item.name}</p>
+            <span className={styles.status}>{item.status}</span>
+          </section>
+
+          {showModal && (
+            <Transaction transaction={item} setShowModal={setShowModal} />
+          )}
+        </>
       )}
 
       <div className={styles.total}>

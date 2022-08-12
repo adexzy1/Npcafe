@@ -21,8 +21,17 @@ const Login = () => {
   //  react-router-dom hooks
   const navigate = useNavigate();
 
+  // login input default values
+  const defaultValue = {
+    email: 'john222@gmail.com',
+    password: 'abc123',
+  };
+
   // custom hooks
-  const { handleSubmit, errors, register } = useValidation(loginSchema);
+  const { handleSubmit, errors, register } = useValidation(
+    loginSchema,
+    defaultValue
+  );
   const [handleError] = useHandleError();
   const [login] = useLogin();
 

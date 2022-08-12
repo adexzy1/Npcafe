@@ -2,14 +2,22 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { IoBasketOutline } from 'react-icons/io5';
 import { RootState } from '../../Redux/store';
+import { useEffect } from 'react';
+import { getTotals } from '../../Redux/CartSlice';
+import { useAppDispatch } from '../../hooks/useDispatch';
 
 interface Props {
   setShowCart?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CartIcon = ({ setShowCart }: Props) => {
+  // react hook forms hook
   const navigate = useNavigate();
+
+  // Redux hooks
   const { totalQuantity } = useSelector((state: RootState) => state.cart);
+  const { cartItems } = useSelector((state: RootState) => state.cart);
+  const dispatch = useAppDispatch();
 
   const handleNavigate = () => {
     const width = window.screen.width;
@@ -19,6 +27,11 @@ const CartIcon = ({ setShowCart }: Props) => {
       navigate('/cart');
     }
   };
+
+  // get the number of total cart items
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [cartItems, dispatch]);
 
   const style = {
     wrapper:

@@ -52,7 +52,7 @@ const Settings = () => {
     if (response === 'success') {
       setIsLoading(false);
       setShowModal(false);
-      //   display success notification
+      //display success notification
       toast.success('Settings saved Succeefully');
     } else {
       // set loading to false

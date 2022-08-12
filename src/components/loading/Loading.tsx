@@ -2,7 +2,7 @@ import loadingIcon from '../../assets/loading.svg';
 
 const Loading = () => {
   const style = {
-    wrapper: 'flex flex-col mt-[15rem] items-center h-screen',
+    wrapper: 'flex flex-col justify-center items-center h-screen',
     logo: 'text-6xl font-bold',
     logoSub: 'text-3xl text-yellow',
     img: 'w-20',
