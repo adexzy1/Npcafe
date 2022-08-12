@@ -8,7 +8,7 @@ interface props {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Transaction = ({ transaction, setShowModal }: props) => {
+const TransactionModal = ({ transaction, setShowModal }: props) => {
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
     setShowModal(false);
@@ -62,4 +62,4 @@ const Transaction = ({ transaction, setShowModal }: props) => {
   );
 };
 
-export default Transaction;
+export default TransactionModal;

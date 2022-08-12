@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { transaction } from '../../Model';
-import Transaction from './Transaction';
+import TransactionModal from './TransactionModal';
 interface Props {
   orderItem?: boolean;
   item: transaction;
@@ -58,7 +58,7 @@ const TransactionsCard = ({ orderItem, item }: Props) => {
           </section>
 
           {showModal && (
-            <Transaction transaction={item} setShowModal={setShowModal} />
+            <TransactionModal transaction={item} setShowModal={setShowModal} />
           )}
         </>
       )}
